@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">MyRelish</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_my_relish_main">MyRelishMainActivity</string>
+    <string name="title_discover">Discover</string>
+    <string name="title_search">Search</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_review">Reviews</string>
+    <string name="title_news_feed">News Feed</string>
+    <string name="title_activity_collection">CollectionActivity</string>
+    <string name="tab_text_1">Trò chơi</string>
+    <string name="tab_text_2">Phim điện ảnh</string>
+    <string name="tab_text_3">Phim truyền hình</string>
+    <string name="tab_text_4">Truyện tranh</string>
+    <string name="tab_text_5">Tiểu thuyết</string>
+
+    <string name="server_url">http://192.168.0.101:8080/apiRelish</string>
+
+    <string name="title_activity_login">Sign in</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+</resources>
