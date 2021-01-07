@@ -1,13 +1,17 @@
 package com.itplus.dao.impl;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
+import com.itplus.entity.Login;
 import com.itplus.entity.User;
 
 @Repository
@@ -45,21 +49,39 @@ public class UserDaoImpl implements UserDao{
 	}
 
 	@Override
-	public boolean checkLogin(User user) {
+	public void register(User user) {
 		// TODO Auto-generated method stub
-		String sql ="SELECT * FROM tbl_user";
-		List<User> listUser = jdbcTemplate.query(sql, new Object[] {}, new BeanPropertyRowMapper<User>());
-		for (User userExist : listUser) {
-			if (StringUtils.pathEquals(user.getEmail(), userExist.getEmail())
-					&& StringUtils.pathEquals(user.getPassword(), userExist.getPassword())) {
-				return true;
-			}
-		}
-		return false;
+		String sql = "INSERT INTO tbl_user(name,email,password,birthday,gender,bio,avatar_img) values(?,?,?,?,?,?,?)";
+		jdbcTemplate.update(sql, new Object[] {user.getName(),user.getEmail(),user.getPassword(),user.getBirthday(),user.getGender(),user.getBio(),user.getAvatar_img()});
+	}
+
+	@Override
+	public User validateUser(Login login) {
+		// TODO Auto-generated method stub
+		String sql ="SELECT * FROM tbl_user; WHERE email='"+login.getEmail()+"' and password='"+login.getPassword()+"'";
+		List<User> list = jdbcTemplate.query(sql, new UserMapper());
+		return list.size() > 0 ? list.get(0) : null;
+	}
+	
+}
+
+class UserMapper implements RowMapper<User> {
+	@Override
+	public User mapRow(ResultSet rs, int rowNum) throws SQLException {
+		// TODO Auto-generated method stub
+		  User user = new User();
+			 
+		    user.setName(rs.getString("name"));
+		    user.setEmail(rs.getString("email"));
+		    user.setPassword(rs.getString("password"));
+		    user.setBirthday(rs.getString("birthday"));
+		    user.setGender(rs.getInt("gender"));
+		    user.setBio(rs.getString("bio"));
+		    user.setAvatar_img(rs.getString("avatar_img"));
+		   
+		 
+		    return user;
 	}
 
 	
-
-
-	
-}
+	}

@@ -26,7 +26,7 @@ public class UserRestController {
 		List<User> listUserById = userService.findUserById(id);
 		Gson gson = new Gson();
 		return gson.toJson(listUserById);
-	}
+	}	
 
 	@RequestMapping(value = "/user/save", method = RequestMethod.POST)
 	public String save(@RequestBody User user) {
@@ -38,8 +38,5 @@ public class UserRestController {
 			return "update error";
 		}
 	}
-	// sửa vẫn bị lỗi
-	
-	
 
 }
