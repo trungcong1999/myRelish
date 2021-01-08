@@ -16,7 +16,7 @@ public class ReviewRestController {
 	@Autowired
 	ReviewService reviewService;
 	//Lấy thông tin về 1 bài review game
-	@RequestMapping(value = "/review/{id}")
+	@RequestMapping(value = "review/{id}")
 	public String getReviewById(@PathVariable int id) {
 		List<Review> list = reviewService.getReviewById(id);
 		Gson gson = new Gson();
@@ -24,7 +24,7 @@ public class ReviewRestController {
 	}
 	
 	//Đếm số lượng các bài review liên quan theo id
-	@RequestMapping(value = "/count/review/{id}")
+	@RequestMapping(value = "count/review/{id}")
 	public String getNumberReivew(@PathVariable int id) {
 		List<Review> listNumberReview = reviewService.getNumberReview(id);
 		Gson gson = new Gson();
@@ -32,7 +32,7 @@ public class ReviewRestController {
 	}
 	
 	//Đếm số lượng số người đã review 1 bài viết theo id
-	@RequestMapping(value = "/count/reviewUser/{id}")
+	@RequestMapping(value = "count/reviewUser/{id}")
 	public String getNumberUserReivew(@PathVariable int id) {
 		List<Review> listNumberUserReview = reviewService.getNumberUserReview(id);
 		Gson gson = new Gson();

@@ -21,7 +21,7 @@ public class TruyenRestController {
 	TruyenService truyenService;
 
 	// Danh sách tất cả Truyện
-	@RequestMapping(value = "/search/name/truyen/", method = RequestMethod.GET)
+	@RequestMapping(value = "search/name/truyen/", method = RequestMethod.GET)
 	public String getTruyenList(HttpServletRequest request) {
 		List<Truyen> list = truyenService.getAll();
 		request.setAttribute("listTruyen", list);
@@ -30,7 +30,7 @@ public class TruyenRestController {
 	}
 
 	// Thêm Truyện
-	@RequestMapping(value = "/ws-add-new-truyen", method = RequestMethod.POST)
+	@RequestMapping(value = "ws-add-new-truyen", method = RequestMethod.POST)
 	public String addTruyen(@RequestBody Truyen truyen) {
 		try {
 			truyenService.addGTruyen(truyen);
@@ -43,7 +43,7 @@ public class TruyenRestController {
 	}
 
 	// Sửa Truyện
-	@RequestMapping(value = "/ws-edit-truyen", method = RequestMethod.POST)
+	@RequestMapping(value = "ws-edit-truyen", method = RequestMethod.POST)
 	public String save(@RequestBody Truyen truyen) {
 		try {
 			truyenService.updateTruyen(truyen);
@@ -55,7 +55,7 @@ public class TruyenRestController {
 	}
 
 	// Xóa Truyên
-	@RequestMapping(value = "/ws-delete-truyen/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "ws-delete-truyen/{id}", method = RequestMethod.GET)
 	public String delete(@PathVariable("id") int id) {
 		try {
 			truyenService.deleteTruyen(id);
@@ -67,7 +67,7 @@ public class TruyenRestController {
 	}
 
 	// tìm theo tên Truyện
-	@RequestMapping(value = "/search/name/truyen/{name}")
+	@RequestMapping(value = "search/name/truyen/{name}")
 	public String getTruyenByName(HttpServletRequest request, @PathVariable String name) {
 		List<Truyen> truyens = truyenService.findByName(name);
 		request.setAttribute("listTruyenName", truyens);
@@ -75,12 +75,5 @@ public class TruyenRestController {
 		return gson.toJson(truyens);
 	}
 
-	// Tìm kiếm tên theo thể loại Truyện
-	@RequestMapping(value = "/search/the-loai-truyen/{categoryId}")
-	public String getTruyenByCategoryId(HttpServletRequest request, @PathVariable String categoryId) {
-		List<Truyen> truyenCategory = truyenService.findByCategoryTruyenId(categoryId);
-		request.setAttribute("listCategoryTruyen", truyenCategory);
-		Gson gson = new Gson();
-		return gson.toJson(truyenCategory);
-	}
+	
 }

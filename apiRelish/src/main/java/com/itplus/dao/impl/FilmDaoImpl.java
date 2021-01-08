@@ -29,7 +29,11 @@ public class FilmDaoImpl implements FilmDao {
 				Film film = new Film();
 				film.setId(rs.getInt("id"));
 				film.setName(rs.getString("name"));
-				
+				film.setPoster_img(rs.getString("poster_img"));
+				film.setDescription(rs.getString("description"));
+				film.setWriter_id(rs.getInt("writer_id"));
+				film.setDirector_id(rs.getInt("director_id"));
+				film.setRelease_date(rs.getString("release_date"));
 				return film;
 			}
 
@@ -40,44 +44,39 @@ public class FilmDaoImpl implements FilmDao {
 	@Override
 	public void addFilm(Film film) {
 		// TODO Auto-generated method stub
-		String sql = "insert into film(name,anh_dai_dien,noi_dung,gioi_thieu,dien_xuat,id_the_loai,id_nha_san_xuat,nam_phat_hanh,sao_danh_gia) values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
-		jdbcTemplate.update(sql, film.getId());
+		String sql = "insert into tbl_film_info(name,poster_img,description,writer_id,director_id,release_date) values(?, ?, ?, ?, ?, ?)";
+		jdbcTemplate.update(sql, film.getName(),film.getPoster_img(),film.getDescription(),film.getWriter_id(),film.getDirector_id(),film.getRelease_date());
 	}
 
 	@Override
 	public void updateFilm(Film film) {
 		// TODO Auto-generated method stub
-		String sql = "update film set name = ?,anh_dai_dien= ?,noi_dung= ?,gioi_thieu= ?,dien_xuat= ?,id_the_loai= ?,id_nha_san_xuat= ?,nam_phat_hanh= ?,sao_danh_gia= ? where id= ? ";
-		jdbcTemplate.update(sql, film.getId());
+		String sql = "update tbl_film_info set name = ?,poster_img= ?,description= ?,writer_id= ?,director_id= ?,release_date= ? where id= ? ";
+		jdbcTemplate.update(sql, film.getName(),film.getPoster_img(),film.getDescription(),film.getWriter_id(),film.getDirector_id(),film.getRelease_date(),film.getId());
 	}
 
 	@Override
 	public void deleteFilm(int id) {
 		// TODO Auto-generated method stub
-		String sql = "delete from film where id = ?";
+		String sql = "delete from tbl_film_info where id = ?";
 		jdbcTemplate.update(sql, id);
 	}
 
 	@Override
 	public Film getFilmById(int id) {
 		// TODO Auto-generated method stub
-		String sql = "Select * from film where id = ?";
+		String sql = "Select * from tbl_film_info where id = ?";
 		return jdbcTemplate.queryForObject(sql, new Object[] { id }, new BeanPropertyRowMapper<Film>(Film.class));
 	}
 
 	@Override
 	public List<Film> findByName(String name) {
 		// TODO Auto-generated method stub
-		String sql = "SELECT * FROM film WHERE name like CONCAT('%',?,'%')";
+		String sql = "SELECT * FROM tbl_film_info WHERE name like CONCAT('%',?,'%')";
 		return jdbcTemplate.query(sql, new Object[] { name }, new BeanPropertyRowMapper<Film>(Film.class));
 
 	}
 
-	@Override
-	public List<Film> findByCategoryFilmId(String categoryId) {
-		// TODO Auto-generated method stub
-		String sql = "SELECT * FROM film,the_loai_film WHERE film.id_the_loai=the_loai_film.id and film.id_the_loai=? ";
-		return jdbcTemplate.query(sql, new Object[] { categoryId }, new BeanPropertyRowMapper<Film>(Film.class));
-	}
+	
 
 }

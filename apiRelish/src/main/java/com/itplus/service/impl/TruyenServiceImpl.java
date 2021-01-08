@@ -50,10 +50,6 @@ public class TruyenServiceImpl implements TruyenService{
 		return truyenDao.findByName(name);
 	}
 
-	@Override
-	public List<Truyen> findByCategoryTruyenId(String categoryId) {
-		// TODO Auto-generated method stub
-		return truyenDao.findByCategoryTruyenId(categoryId);
-	}
+	
 
 }
