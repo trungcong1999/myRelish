@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.itplus.dao.impl.UserDao;
-import com.itplus.entity.Login;
 import com.itplus.entity.User;
 import com.itplus.service.UserService;
 
@@ -29,15 +28,19 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void register(User user) {
+	public User findByEmail(String email) {
 		// TODO Auto-generated method stub
-		userDao.register(user);
+		return userDao.findByEmail(email);
 	}
 
 	@Override
-	public User validateUser(Login login) {
+	public boolean checklogin(String email, String password) {
 		// TODO Auto-generated method stub
-		return userDao.validateUser(login);
+		User user = userDao.findByEmail(email);
+		if(user!=null&&user.getPassword().equals(password)) {
+			return true;
+		}
+		return false;
 	}
 
 	
