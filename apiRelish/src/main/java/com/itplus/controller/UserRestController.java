@@ -24,14 +24,14 @@ public class UserRestController {
 	UserService userService;
 
 	// Lấy thông tin 1 người dùng dựa vào id
-	@RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "user/{id}", method = RequestMethod.GET)
 	public String edit(@PathVariable int id, HttpServletRequest request) {
 		List<User> listUserById = userService.findUserById(id);
 		Gson gson = new Gson();
 		return gson.toJson(listUserById);
 	}	
 
-	@RequestMapping(value = "/user/save", method = RequestMethod.POST)
+	@RequestMapping(value = "user/save", method = RequestMethod.POST)
 	public String save(@RequestBody User user) {
 		try {
 			userService.updateUser(user);
@@ -42,7 +42,7 @@ public class UserRestController {
 		}
 	}
 	
-	@RequestMapping(value = "/user/login", method = RequestMethod.GET)
+	@RequestMapping(value = "user/login", method = RequestMethod.GET)
 	public ModelAndView showLogin(HttpServletRequest request) {
 		ModelAndView view = new ModelAndView("login");
 		User user = new User();
@@ -50,7 +50,7 @@ public class UserRestController {
 		return view;
 	}
 	@ResponseBody
-	@RequestMapping(value = "/user/login", method = RequestMethod.POST)
+	@RequestMapping(value = "user/login", method = RequestMethod.POST)
 	public ModelAndView processLogin(@ModelAttribute("loginBean") User user, HttpServletRequest request) {
 		ModelAndView view =null;
 		if(userService.checklogin(user.getEmail(), user.getPassword())) {

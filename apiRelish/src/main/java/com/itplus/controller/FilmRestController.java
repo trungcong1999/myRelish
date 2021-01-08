@@ -55,7 +55,7 @@ public class FilmRestController {
 	}
 
 	// xóa phim theo id
-	@RequestMapping(value = "/ws-delete-film/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "ws-delete-film/{id}", method = RequestMethod.GET)
 	public String delete(@PathVariable("id") int id) {
 		try {
 			filmService.deleteFilm(id);
@@ -67,7 +67,7 @@ public class FilmRestController {
 	}
 
 	// tìm theo tên phim
-	@RequestMapping(value = "/search/name/film/{name}")
+	@RequestMapping(value = "search/name/film/{name}")
 	public String getFilmByName(HttpServletRequest request, @PathVariable String name) {
 		List<Film> films = filmService.findByName(name);
 		request.setAttribute("listFilmName", films);
