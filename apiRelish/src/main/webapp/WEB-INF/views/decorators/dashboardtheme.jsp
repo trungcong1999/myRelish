@@ -1,9 +1,12 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page errorPage="../pages/examples/500.jsp"%>
 <jsp:include page="../parts/cachecontrol.jsp"></jsp:include>
 <html>
     <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title><sitemesh:write property='title' /></title>
 		<sitemesh:write property='head' />
     </head>
@@ -12,7 +15,7 @@
         <header class="header">
             <a href="${pageContext.request.contextPath}/" class="logo">
                 <!-- Add the class icon to your logo image or logo icon to add the margining -->
-                AdminLTE
+                Relish
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top" role="navigation">
@@ -217,7 +220,7 @@
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="glyphicon glyphicon-user"></i>
-                                <span>Jane Doe <i class="caret"></i></span>
+                                <span>Công <i class="caret"></i></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
@@ -246,7 +249,7 @@
                                         <a href="#" class="btn btn-default btn-flat">Profile</a>
                                     </div>
                                     <div class="pull-right">
-                                        <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                        <a href="${pageContext.request.contextPath}/pages/examples/login" class="btn btn-default btn-flat">Sign out</a>
                                     </div>
                                 </li>
                             </ul>
@@ -266,7 +269,7 @@
                             <img src="${pageContext.request.contextPath}/resources/img/avatar3.png" class="img-circle" alt="User Image" />
                         </div>
                         <div class="pull-left info">
-                            <p>Hello, Jane</p>
+                            <p>Hello, Công</p>
 
                             <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                         </div>
@@ -288,49 +291,45 @@
                                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                             </a>
                         </li>
-                        <li>
-                            <a href="${pageContext.request.contextPath}/pages/widgets">
-                                <i class="fa fa-th"></i> <span>Widgets</span> <small class="badge pull-right bg-green">new</small>
-                            </a>
-                        </li>
+                        
                         <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-bar-chart-o"></i>
-                                <span>Charts</span>
+                                <span>Quản trị Danh mục</span>
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="${pageContext.request.contextPath}/pages/charts/morris"><i class="fa fa-angle-double-right"></i> Morris</a></li>
-                                <li><a href="${pageContext.request.contextPath}/pages/charts/flot"><i class="fa fa-angle-double-right"></i> Flot</a></li>
-                                <li><a href="${pageContext.request.contextPath}/pages/charts/inline"><i class="fa fa-angle-double-right"></i> Inline charts</a></li>
+                                <li><a href="${pageContext.request.contextPath}/pages/category/categorys"><i class="fa fa-angle-double-right"></i> Loại danh mục</a></li>
+                                <li><a href="${pageContext.request.contextPath}/pages/category/posts"><i class="fa fa-angle-double-right"></i> Bài viết</a></li>
+                                
+                                
                             </ul>
                         </li>
                         <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-laptop"></i>
-                                <span>UI Elements</span>
+                                <span>Quản lý Giao diện</span>
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="${pageContext.request.contextPath}/pages/UI/general"><i class="fa fa-angle-double-right"></i> General</a></li>
-                                <li><a href="${pageContext.request.contextPath}/pages/UI/icons"><i class="fa fa-angle-double-right"></i> Icons</a></li>
-                                <li><a href="${pageContext.request.contextPath}/pages/UI/buttons"><i class="fa fa-angle-double-right"></i> Buttons</a></li>
-                                <li><a href="${pageContext.request.contextPath}/pages/UI/sliders"><i class="fa fa-angle-double-right"></i> Sliders</a></li>
-                                <li><a href="${pageContext.request.contextPath}/pages/UI/timeline"><i class="fa fa-angle-double-right"></i> Timeline</a></li>
+                                <li><a href="${pageContext.request.contextPath}/pages/UI/general"><i class="fa fa-angle-double-right"></i> Hình ảnh</a></li>
+                                <li><a href="${pageContext.request.contextPath}/pages/UI/icons"><i class="fa fa-angle-double-right"></i> Thông tin</a></li>
+                                <li><a href="${pageContext.request.contextPath}/pages/UI/buttons"><i class="fa fa-angle-double-right"></i> Nội dung khác</a></li>   
                             </ul>
                         </li>
                         <li class="treeview">
                             <a href="#">
-                                <i class="fa fa-edit"></i> <span>Forms</span>
+                                <i class="fa fa-edit"></i> <span>Quản lý Thành viên</span>
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="${pageContext.request.contextPath}/pages/forms/general"><i class="fa fa-angle-double-right"></i> General Elements</a></li>
-                                <li><a href="${pageContext.request.contextPath}/pages/forms/advanced"><i class="fa fa-angle-double-right"></i> Advanced Elements</a></li>
-                                <li><a href="${pageContext.request.contextPath}/pages/forms/editors"><i class="fa fa-angle-double-right"></i> Editors</a></li>
+                                <li><a href="${pageContext.request.contextPath}/pages/manages/alluser"><i class="fa fa-angle-double-right"></i> Tất cả người dùng</a></li>
+                                <li><a href="${pageContext.request.contextPath}/pages/manages/adduser"><i class="fa fa-angle-double-right"></i> Thêm mới</a></li>
+                                <li><a href="${pageContext.request.contextPath}/pages/manages/profileuser"><i class="fa fa-angle-double-right"></i> Hồ sơ của bạn</a></li>
+                            	<li><a href="${pageContext.request.contextPath}/pages/examples/login"><i class="fa fa-angle-double-right"></i> Thoát</a></li>
                             </ul>
                         </li>
-                        <li class="treeview">
+                        <%-- <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-table"></i> <span>Tables</span>
                                 <i class="fa fa-angle-left pull-right"></i>
@@ -351,10 +350,10 @@
                                 <i class="fa fa-envelope"></i> <span>Mailbox</span>
                                 <small class="badge pull-right bg-yellow">12</small>
                             </a>
-                        </li>
-                        <li class="treeview">
+                        </li> --%>
+                       <%--  <li class="treeview">
                             <a href="#">
-                                <i class="fa fa-folder"></i> <span>Examples</span>
+                                <i class="fa fa-cog"></i> <span>Thiết lập</span>
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
@@ -366,7 +365,7 @@
                                 <li><a href="${pageContext.request.contextPath}/pages/examples/500"><i class="fa fa-angle-double-right"></i> 500 Error</a></li>
                                 <li><a href="${pageContext.request.contextPath}/pages/examples/blank"><i class="fa fa-angle-double-right"></i> Blank Page</a></li>
                             </ul>
-                        </li>
+                        </li> --%>
                     </ul>
                 </section>
                 <!-- /.sidebar -->
