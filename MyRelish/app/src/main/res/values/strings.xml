@@ -16,7 +16,7 @@
     <string name="tab_text_4">Truyện tranh</string>
     <string name="tab_text_5">Tiểu thuyết</string>
 
-    <string name="server_url">http://192.168.0.101:8080/apiRelish</string>
+    <string name="server_url">http://192.168.1.216:8080/apiRelish</string>
 
     <string name="title_activity_login">Sign in</string>
     <string name="prompt_email">Email</string>
@@ -27,4 +27,8 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+
+    <string name="login_message_wrong_info">Sai tên đăng nhập hoặc mật khẩu</string>
+    <string name="login_require_message">Bạn cần đăng nhập để sử dụng tính năng này</string>
+    <string name="login">Đăng nhập</string>
 </resources>

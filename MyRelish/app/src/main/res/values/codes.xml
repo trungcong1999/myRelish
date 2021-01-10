@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="loginRequestCode">10000</integer>
+    <integer name="logoutRequestCode">10001</integer>
+    <integer name="loginResultSuccessCode">1</integer>
+    <integer name="loginResultSkipCode">2</integer>
+</resources>

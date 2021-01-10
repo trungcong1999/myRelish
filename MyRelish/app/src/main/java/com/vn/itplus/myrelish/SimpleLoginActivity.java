@@ -1,6 +1,7 @@
 package com.vn.itplus.myrelish;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -35,21 +36,26 @@ public class SimpleLoginActivity extends AppCompatActivity {
         }
     }
     public void dontLogin(View view){
+        Intent intent = new Intent();
+        setResult(getResources().getInteger(R.integer.loginResultSkipCode), intent);
         finish();
     }
 
     private void onLoginSuccess(int userId){
-        Toast.makeText(this,"Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this,"Đăng nhập thành công", Toast.LENGTH_SHORT).show();
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putInt("userId",userId);
         editor.apply();
+
+        Intent intent = new Intent();
+        setResult(getResources().getInteger(R.integer.loginResultSuccessCode), intent);
         finish();
     }
 
     private void onLoginFailed(){
-        Toast.makeText(this,"Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
-        loginMessage.setTextColor(getResources().getColor(R.color.colorError));
-        loginMessage.setText("Sai tên đăng nhập hoặc mật khẩu");
+//        Toast.makeText(this,"Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
+        loginMessage.setTextColor(ContextCompat.getColor(this, R.color.colorError));
+        loginMessage.setText(getResources().getString(R.string.login_message_wrong_info));
     }
 }
