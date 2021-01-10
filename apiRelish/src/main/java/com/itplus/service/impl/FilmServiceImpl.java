@@ -50,10 +50,6 @@ public class FilmServiceImpl implements FilmService {
 		return filmDao.findByName(name);
 	}
 
-	@Override
-	public List<Film> findByCategoryFilmId(String categoryId) {
-		// TODO Auto-generated method stub
-		return filmDao.findByCategoryFilmId(categoryId);
-	}
+
 
 }

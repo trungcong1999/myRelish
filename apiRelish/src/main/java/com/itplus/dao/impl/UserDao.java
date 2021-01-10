@@ -8,5 +8,6 @@ public interface UserDao {
 	List<User> findUserById(int id);
 	void updateUser(User user);
 	boolean addUser(User user);
-	boolean checkLogin(User user);
+	User findByEmail(String email);
+
 }

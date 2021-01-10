@@ -10,4 +10,6 @@ import com.itplus.entity.User;
 public interface UserService {
 	List<User> findUserById(int id);
 	void updateUser(User user);
+	User findByEmail(String email);
+	boolean checklogin(String email, String password);
 }

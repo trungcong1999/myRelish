@@ -20,7 +20,7 @@ public class TruyenDaoImpl implements TruyenDao {
 	@Override
 	public List<Truyen> getAll() {
 		// TODO Auto-generated method stub
-		String sql = "SELECT * FROM truyen";
+		String sql = "SELECT * FROM tbl_novel_info";
 		List<Truyen> listTruyen = jdbcTemplate.query(sql, new Object[] {}, new RowMapper<Truyen>() {
 
 			@Override
@@ -29,6 +29,10 @@ public class TruyenDaoImpl implements TruyenDao {
 				Truyen truyen = new Truyen();
 				truyen.setId(rs.getInt("id"));
 				truyen.setName(rs.getString("name"));
+				truyen.setAuthor_id(rs.getInt("author_id"));
+				truyen.setDescription(rs.getString("description"));
+				truyen.setCover_img(rs.getString("cover_img"));
+				truyen.setRelease_date(rs.getString("release_date"));
 		
 				return truyen;
 			}
@@ -40,43 +44,37 @@ public class TruyenDaoImpl implements TruyenDao {
 	@Override
 	public void addGTruyen(Truyen truyen) {
 		// TODO Auto-generated method stub
-		String sql = "insert into truyen(name,tac_gia,noi_dung,anh_dai_dien,cot_truyen,sao_danh_gia,id_the_loai,nam_phat_hanh) values(?,?,?,?,?,?,?,?)";
-		jdbcTemplate.update(sql, truyen.getName());
+		String sql = "insert into tbl_novel_info(name,author_id ,description,cover_img,release_date) values(?,?,?,?,?)";
+		jdbcTemplate.update(sql, truyen.getName(),truyen.getAuthor_id(),truyen.getDescription(),truyen.getCover_img(),truyen.getRelease_date());
 	}
 
 	@Override
 	public void updateTruyen(Truyen truyen) {
 		// TODO Auto-generated method stub
-		String sql = "update truyeb set name=?,tac_gia=?,noi_dung=?,anh_dai_dien=?,cot_truyen=?,sao_danh_gia=?,id_the_loai=?,nam_phat_hanh=? where id=?";
-		jdbcTemplate.update(sql, truyen.getName());
+		String sql = "update tbl_novel_info set name=?,author_id=?,description=?,cover_img=?,release_date=? where id=?";
+		jdbcTemplate.update(sql, truyen.getName(),truyen.getAuthor_id(),truyen.getDescription(),truyen.getCover_img(),truyen.getRelease_date(),truyen.getId());
 	}
 
 	@Override
 	public void deleteTruyen(int id) {
 		// TODO Auto-generated method stub
-		String sql = "delete from truyen where id = ?";
+		String sql = "delete from tbl_novel_info where id = ?";
 		jdbcTemplate.update(sql, id);
 	}
 
 	@Override
 	public Truyen getTruyenById(int id) {
 		// TODO Auto-generated method stub
-		String sql = "Select * from truyen where id = ?";
+		String sql = "Select * from tbl_novel_info where id = ?";
 		return jdbcTemplate.queryForObject(sql, new Object[] { id }, new BeanPropertyRowMapper<Truyen>(Truyen.class));
 	}
 
 	@Override
 	public List<Truyen> findByName(String name) {
 		// TODO Auto-generated method stub
-		String sql = "SELECT * FROM truyen WHERE name like CONCAT('%',?,'%')";
+		String sql = "SELECT * FROM tbl_novel_info WHERE name like CONCAT('%',?,'%')";
 		return jdbcTemplate.query(sql, new Object[] { name }, new BeanPropertyRowMapper<Truyen>(Truyen.class));
 	}
 
-	@Override
-	public List<Truyen> findByCategoryTruyenId(String categoryId) {
-		// TODO Auto-generated method stub
-		String sql = "SELECT * FROM truyen,the_loai_truyen WHERE truyen.id_the_loai=the_loai_truyen.id and truyen.id_the_loai=? ";
-		return jdbcTemplate.query(sql, new Object[] { categoryId }, new BeanPropertyRowMapper<Truyen>(Truyen.class));
-	}
-
+	
 }

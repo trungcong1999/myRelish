@@ -27,6 +27,22 @@ public class UserServiceImpl implements UserService {
 		userDao.updateUser(user);
 	}
 
+	@Override
+	public User findByEmail(String email) {
+		// TODO Auto-generated method stub
+		return userDao.findByEmail(email);
+	}
+
+	@Override
+	public boolean checklogin(String email, String password) {
+		// TODO Auto-generated method stub
+		User user = userDao.findByEmail(email);
+		if(user!=null&&user.getPassword().equals(password)) {
+			return true;
+		}
+		return false;
+	}
+
 	
 
 }

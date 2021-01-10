@@ -21,7 +21,7 @@ public class GameRestController {
 	GameService gameService;
 
 	//Danh sách tất cả các game
-	@RequestMapping(value = "/search/name/game/", method = RequestMethod.GET)
+	@RequestMapping(value = "search/name/game/", method = RequestMethod.GET)
 	public String getGameList(HttpServletRequest request) {
 		List<Game> list = gameService.getAll();
 		request.setAttribute("listGame", list);
@@ -30,7 +30,7 @@ public class GameRestController {
 	}
 
 	//Thêm Game
-	@RequestMapping(value = "/ws-add-new-game", method = RequestMethod.POST)
+	@RequestMapping(value = "ws-add-new-game", method = RequestMethod.POST)
 	public String addGame(@RequestBody Game game) {
 		try {
 			gameService.addGame(game);
@@ -44,7 +44,7 @@ public class GameRestController {
 	
 
 	//Sửa Game
-	@RequestMapping(value = "/ws-edit-game", method = RequestMethod.POST)
+	@RequestMapping(value = "ws-edit-game", method = RequestMethod.POST)
 	public String save(@RequestBody Game game) {
 		try {
 			gameService.updateGame(game);
@@ -56,7 +56,7 @@ public class GameRestController {
 	}
 
 	//Xóa Game
-	@RequestMapping(value = "/ws-delete-game/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "ws-delete-game/{id}", method = RequestMethod.GET)
 	public String delete(@PathVariable("id") int id) {
 		try {
 			gameService.deleteGame(id);
@@ -68,7 +68,7 @@ public class GameRestController {
 	}
 	
 	//tìm theo tên game
-		@RequestMapping(value = "/search/name/game/{name}")
+		@RequestMapping(value = "search/name/game/{name}")
 		public String getGameByName(HttpServletRequest request,@PathVariable String name) {
 			List<Game> games = gameService.findByName(name);
 			request.setAttribute("listGameName", games);
@@ -77,7 +77,7 @@ public class GameRestController {
 		}
 		
 	//Lấy sản phầm mới nhất
-		@RequestMapping(value = "/show/lastGame/{limit}",method = RequestMethod.GET)
+		@RequestMapping(value = "show/lastGame/{limit}",method = RequestMethod.GET)
 		public String getLatesProductGame(HttpServletRequest request,@PathVariable int limit) {
 			List<Game> gameLates = gameService.getLatestProducts(limit);
 			request.setAttribute("listLatesProduct", gameLates);
@@ -86,7 +86,7 @@ public class GameRestController {
 		}
 		
 	//Hiện danh sách các game có cùng 1 tag
-		@RequestMapping(value = "/game/tag/{id}")
+		@RequestMapping(value = "game/tag/{id}")
 		public String getTagGame(@PathVariable int id) {
 			List<Game> tagList = gameService.getTagId(id);
 			Gson gson = new Gson();
@@ -94,7 +94,7 @@ public class GameRestController {
 		}
 		
 	//Lấy danh sách các game đã review của 1 người dùng (dựa vào id người dùng)
-		@RequestMapping(value = "/game/reivew/user/{id}")
+		@RequestMapping(value = "game/reivew/user/{id}")
 		public String getReviewByIdUser(@PathVariable int id) {
 			List<Game> gamesIdUser = gameService.getReviewByIdUser(id);
 			Gson gson = new Gson();
@@ -102,7 +102,7 @@ public class GameRestController {
 		}
 		
 	//Lấy thông tin về 1 game dựa vào id,kèm theo overall_score của một số bài review ngẫu nhiên
-		@RequestMapping(value = "/game/reivew/user/radom/{id}")
+		@RequestMapping(value = "game/reivew/user/radom/{id}")
 		public String getRadomReviewById(@PathVariable int id) {
 			List<Game> gamesIdUser = gameService.getRadomReviewById(id);
 			Gson gson = new Gson();

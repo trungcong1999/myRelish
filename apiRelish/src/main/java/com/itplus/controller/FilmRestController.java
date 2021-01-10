@@ -21,7 +21,7 @@ public class FilmRestController {
 	FilmService filmService;
 
 	// Danh sách tất cả các phim
-	@RequestMapping(value = "/search/name/film/", method = RequestMethod.GET)
+	@RequestMapping(value = "search/name/film/", method = RequestMethod.GET)
 	public String getFilmList(HttpServletRequest request) {
 		List<Film> list = filmService.getAll();
 		request.setAttribute("listFilm", list);
@@ -30,7 +30,7 @@ public class FilmRestController {
 	}
 
 	// Thêm phim
-	@RequestMapping(value = "/ws-add-new-film", method = RequestMethod.POST)
+	@RequestMapping(value = "ws-add-new-film", method = RequestMethod.POST)
 	public String addFilm(@RequestBody Film film) {
 		try {
 			filmService.addFilm(film);
@@ -43,7 +43,7 @@ public class FilmRestController {
 	}
 
 	// Sửa phim
-	@RequestMapping(value = "/ws-edit-film", method = RequestMethod.POST)
+	@RequestMapping(value = "ws-edit-film", method = RequestMethod.POST)
 	public String save(@RequestBody Film film) {
 		try {
 			filmService.updateFilm(film);
@@ -55,7 +55,7 @@ public class FilmRestController {
 	}
 
 	// xóa phim theo id
-	@RequestMapping(value = "/ws-delete-film/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "ws-delete-film/{id}", method = RequestMethod.GET)
 	public String delete(@PathVariable("id") int id) {
 		try {
 			filmService.deleteFilm(id);
@@ -67,7 +67,7 @@ public class FilmRestController {
 	}
 
 	// tìm theo tên phim
-	@RequestMapping(value = "/search/name/film/{name}")
+	@RequestMapping(value = "search/name/film/{name}")
 	public String getFilmByName(HttpServletRequest request, @PathVariable String name) {
 		List<Film> films = filmService.findByName(name);
 		request.setAttribute("listFilmName", films);
@@ -75,13 +75,5 @@ public class FilmRestController {
 		return gson.toJson(films);
 	}
 
-	// Tìm kiếm tên theo thể loại phim
-	@RequestMapping(value = "/search/the-loai-film/{categoryId}")
-	public String getFilmByCategoryId(HttpServletRequest request, @PathVariable String categoryId) {
-		List<Film> filmCategory = filmService.findByCategoryFilmId(categoryId);
-		request.setAttribute("listCategoryFilm", filmCategory);
-		Gson gson = new Gson();
-		return gson.toJson(filmCategory);
-	}
-
+	
 }

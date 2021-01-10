@@ -14,5 +14,4 @@ public interface FilmService {
 	void deleteFilm(int id);
 	Film getFilmById(int id);
 	List<Film> findByName(String name);
-	List<Film> findByCategoryFilmId(String categoryId);
 }
