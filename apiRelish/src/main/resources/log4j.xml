@@ -11,7 +11,7 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="in.anandm.apps">
+	<logger name="com.itplus.configuration">
 		<level value="info" />
 	</logger>
 	
