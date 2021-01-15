@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GameInfoActivity">
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:nestedScrollingEnabled="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="48dp"
+            android:paddingBottom="16dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/image_game_header"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintDimensionRatio="1.7777777777"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:srcCompat="@tools:sample/backgrounds/scenic" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/text_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="Herritage: Flowers for the fallen"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:fillViewport="true">
+
+                <TextView
+                    android:id="@+id/text_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="serif"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:text="Fight in the theatre of war that changed the world forever. Battle alongside your compatriots on some of the most inhospitable environments of the Eastern Front in Red Orchestra: Ostfront 41-45. Red Orchestra places you in the most realistic WWII first-person multi-player combat to date on the PC allowing the player to fight through some of the most intense combat of the war. You can play as infantry using a wide range of infantry weapons or crew one of the many armored combat vehicles available in the game from half-tracks to the most famous German and Soviet heavy tanks. Engage the enemy with everything in your arsenal from your bayonet at close quarters up to the massive 122mm cannon on the Soviet IS-2. And if that isnt enough find an officer and a radio to call in thunderous artillery strikes to shake the enemy loose.Crew 16 fully realized vehicles with highly detailed exterior and interior models Choose from 30 authentic infantry weapons Full 50+ player online Multiplayer SupportUnique Setting - the only FPS to focus on the WWII Russian FrontEngage enemy tanks at 800 metres and more with the Simulation-level armored vehicle combatFight the full range of combined arms infantry and vehicle combat in detailed environments based on real-world data from city-centre to deeply rural settings Realistic bullet and projectile ballistics will make you duck for cover Coordinate strategies with your team-mates via Voice Over IP Authentic Immersive Sound FX and 3d Positional Sound System 3D Iron Sights and unique 3D scope system True weapon deployment system including resting rifles on supportHistorically accurate artillery system Distance-based sound system dynamically creates the battle ambianceAdvanced player movement system featuring diving over obstacles and leaning Custom 8 way animation system for highly realistic player animations New for Summer 07This update includes a new map a new vehicle and some major graphical enhancements to the game and is available to owners of the game for free through Steam. The new map - Krivoi Rog - gives players the largest tank slugfest to date with 16 square kilometers of terrain 3000 meter viewable range and up to 50 players. This map also features the new vehicle - the German Panzer IV G providing the German players with some additional fire-power for the mid-war period.In addition to the new map and vehicle an all-new adaptive bloom system has been added for the games graphics making the bloom crystal-clear even at low resolutions. For further eye-candy Anti-Aliasing and Anisotropic Filtering settings are now configurable in-game.New for Spring 07Ten new maps the winning entries in Tripwires Custom Map Competition. Tripwire worked with the developers of each of these maps to ensure the maps are optimized polished and gameplay balanced. Highlights in the new map-pack include:Smolensk Stalemate: the contest winning map features perfectly balanced to-and-fro infantry combat through ruined villages and trenches in August 1943.Leningrad: features close-quarters infantry fighting in the ruined streets of the city above them in the bombed-out buildings and deep beneath them in the sewers all with close-in armor support.Berezina: the After-Hourz team surpass themselves on this rural/village map introducing not just a new vehicle (the Russian BT-7 light tank) but also the first functional anti-tank gun in the game. To cap it off the BT-7 even carries tank-riders.Black Day July: one of the very best for tank combat fans set in the rolling countryside around Prokhorovka as German and Russian armor clash en masse during the Battle of Kursk.Increased player limits. A new level of intensity with 50+ player multiplayer battles (up from the previous limit of 32).New community made content including the Russian BT-7 light tank with infantry tank riders and the first player controllable anti-tank gun in the game.New soundtrack: The Orchestra comes to the Ostfront - the game now features a complete in-game soundtrack from composer Matthew Burns.Gameplay enhancements. The addition of several features requested by the clan/ladder/league community to enhance competitive play."
+                    android:textSize="14sp" />
+            </androidx.core.widget.NestedScrollView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:weightSum="3">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingLeft="4dp"
+                    android:paddingRight="4dp">
+
+                    <TextView
+                        android:id="@+id/title_release_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Release Date"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/text_release_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="29/12/2020"
+                        android:textAlignment="center"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingLeft="4dp"
+                    android:paddingRight="4dp">
+
+                    <TextView
+                        android:id="@+id/title_developer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Developer"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/text_developer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="StardustRain Studio"
+                        android:textAlignment="center"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingLeft="4dp"
+                    android:paddingRight="4dp">
+
+                    <TextView
+                        android:id="@+id/title_publisher"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Publisher"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/text_publisher"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="AwesomeGame"
+                        android:textAlignment="center"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView29"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:fontFamily="cursive"
+                android:text="Reviews"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="bottom|top"
+                android:orientation="horizontal"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:weightSum="3">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingLeft="4dp"
+                    android:paddingRight="4dp">
+
+                    <TextView
+                        android:id="@+id/text_num_people"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:paddingLeft="4dp"
+                        android:paddingRight="4dp"
+                        android:text="0"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/title_num_people"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:paddingLeft="4dp"
+                        android:paddingRight="4dp"
+                        android:text="người đã thêm vào bộ sưu tập"
+                        android:textAlignment="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingLeft="4dp"
+                    android:paddingRight="4dp">
+
+                    <TextView
+                        android:id="@+id/text_myrelish_score"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:text="0.0"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/title_myrelish_score"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:paddingLeft="4dp"
+                        android:paddingRight="4dp"
+                        android:text="điểm trung bình đánh giá"
+                        android:textAlignment="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingLeft="4dp"
+                    android:paddingRight="4dp">
+
+                    <TextView
+                        android:id="@+id/text_num_reviews"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:paddingLeft="4dp"
+                        android:paddingRight="4dp"
+                        android:text="0"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/title_num_reviews"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:paddingLeft="4dp"
+                        android:paddingRight="4dp"
+                        android:text="bài đánh giá viết bởi người dùng"
+                        android:textAlignment="center" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/text_is_game_in_collection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Game chưa có trong bộ sưu tập của bạn"
+                android:textAlignment="center" />
+
+            <LinearLayout
+                android:id="@+id/btn_add_to_collection"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="8dp"
+                android:background="@color/colorPrimary"
+                android:orientation="horizontal"
+                android:paddingLeft="4dp"
+                android:paddingRight="8dp">
+
+                <ImageView
+                    android:id="@+id/btn_add_collection_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:padding="6dp"
+                    android:scaleType="fitCenter"
+                    android:tint="@color/colorOnPrimary"
+                    app:srcCompat="@drawable/write" />
+
+                <TextView
+                    android:id="@+id/btn_add_collection_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:text="Viết bài đánh giá"
+                    android:textColor="@color/colorOnPrimary"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btn_goto_my_review"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="8dp"
+                android:background="@color/colorPrimary"
+                android:orientation="horizontal"
+                android:paddingLeft="4dp"
+                android:paddingRight="8dp"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/btn_goto_my_review_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:padding="6dp"
+                    android:scaleType="fitCenter"
+                    android:tint="@color/colorOnPrimary"
+                    app:srcCompat="@drawable/edit" />
+
+                <TextView
+                    android:id="@+id/btn_goto_my_review_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:text="Xem đánh giá của bạn"
+                    android:textColor="@color/colorOnPrimary"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView33"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="Bài đánh giá của mọi người"
+                android:textAlignment="center" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/listview_other_reviews"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <TextView
+                android:id="@+id/textView35"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Xem thêm"
+                android:textAlignment="center"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:background="@color/colorPrimaryDark"
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/colorTransparent"
+            android:onClick="goBack"
+            android:padding="4dp"
+            android:scaleType="fitXY"
+            android:tint="@color/colorOnPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_arrow" />
+
+        <TextView
+            android:id="@+id/text_title_top"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Tên trò chơi"
+            android:textColor="@color/colorOnPrimary"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_action_button"
+            app:layout_constraintStart_toEndOf="@+id/imageButton"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/btn_action_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/colorTransparent"
+            android:onClick="addToCollection"
+            android:padding="4dp"
+            android:scaleType="fitCenter"
+            android:tint="@color/colorOnPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/write" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
