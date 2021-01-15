@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 import com.itplus.entity.Film;
+import com.itplus.entity.Truyen;
 import com.itplus.service.FilmService;
 
 @RestController
@@ -75,5 +76,12 @@ public class FilmRestController {
 		return gson.toJson(films);
 	}
 
-	
+	//Lấy sản phầm mới nhất
+	@RequestMapping(value = "show/lastFilm/{limit}",method = RequestMethod.GET)
+	public String getLatesProductGame(HttpServletRequest request,@PathVariable int limit) {
+		List<Film> gameLates = filmService.getLatestProducts(limit);
+		request.setAttribute("listLatesProduct", gameLates);
+		Gson gson = new Gson();
+		return gson.toJson(gameLates);
+	}
 }

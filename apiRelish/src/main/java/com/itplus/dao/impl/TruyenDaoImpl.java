@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import com.itplus.entity.Game;
 import com.itplus.entity.Truyen;
 
 @Repository
@@ -74,6 +75,12 @@ public class TruyenDaoImpl implements TruyenDao {
 		// TODO Auto-generated method stub
 		String sql = "SELECT * FROM tbl_novel_info WHERE name like CONCAT('%',?,'%')";
 		return jdbcTemplate.query(sql, new Object[] { name }, new BeanPropertyRowMapper<Truyen>(Truyen.class));
+	}
+
+	@Override
+	public List<Truyen> getLatestProducts(int limit) {
+		String sql = "SELECT * FROM tbl_novel_info ORDER BY release_date DESC LIMIT ?";
+		return jdbcTemplate.query(sql,new Object[] {limit}, new BeanPropertyRowMapper<Truyen>(Truyen.class));
 	}
 
 	

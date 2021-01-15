@@ -50,6 +50,11 @@ public class TruyenServiceImpl implements TruyenService{
 		return truyenDao.findByName(name);
 	}
 
+	@Override
+	public List<Truyen> getLatestProducts(int limit) {
+		return truyenDao.getLatestProducts(limit);
+	}
+
 	
 
 }

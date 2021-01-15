@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.itplus.entity.Film;
+import com.itplus.entity.Truyen;
 
 @Service
 public interface FilmService {
@@ -14,4 +15,5 @@ public interface FilmService {
 	void deleteFilm(int id);
 	Film getFilmById(int id);
 	List<Film> findByName(String name);
+	List<Film> getLatestProducts(int limit);
 }

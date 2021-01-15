@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
+import com.itplus.entity.Game;
 import com.itplus.entity.Truyen;
 import com.itplus.service.TruyenService;
 
@@ -75,5 +76,12 @@ public class TruyenRestController {
 		return gson.toJson(truyens);
 	}
 
-	
+	//Lấy sản phầm mới nhất
+	@RequestMapping(value = "show/lastNovel/{limit}",method = RequestMethod.GET)
+	public String getLatesProductGame(HttpServletRequest request,@PathVariable int limit) {
+		List<Truyen> gameLates = truyenService.getLatestProducts(limit);
+		request.setAttribute("listLatesProduct", gameLates);
+		Gson gson = new Gson();
+		return gson.toJson(gameLates);
+	}
 }

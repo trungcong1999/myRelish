@@ -50,6 +50,11 @@ public class FilmServiceImpl implements FilmService {
 		return filmDao.findByName(name);
 	}
 
+	@Override
+	public List<Film> getLatestProducts(int limit) {
+		return filmDao.getLatestProducts(limit);
+	}
+
 
 
 }

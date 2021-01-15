@@ -17,5 +17,5 @@
     <color name="colorOnError">#ffffff</color>
     <color name="colorTransparent">#00FFFFFF</color>
     <color name="colorOverlayImage">#7BF5F5F5</color>
-    <color name="colorBackgroundTint">#E0E0E0</color>
+    <color name="colorBackgroundTint">#EEEEEE</color>
 </resources>

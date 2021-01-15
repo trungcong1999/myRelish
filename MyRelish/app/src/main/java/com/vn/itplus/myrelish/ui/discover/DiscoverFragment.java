@@ -15,22 +15,164 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 import com.vn.itplus.myrelish.R;
 import com.vn.itplus.myrelish.SimpleLoginActivity;
+import com.vn.itplus.myrelish.decorator.GridSpacingItemDecoration;
+import com.vn.itplus.myrelish.dto.ItemProductCard;
+import com.vn.itplus.myrelish.viewAdapter.ListProductCardRecycleAdapter;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 public class DiscoverFragment extends Fragment {
+    private static int LIST_QUERY_SIZE = 9;
+    private static int GRID_COLUMN = 3;
 
     private DiscoverViewModel discoverViewModel;
+
+    private RecyclerView listviewRecentGame, listviewRecentMovie, listviewRecentNovel;
+    private ListProductCardRecycleAdapter listGameAdapter, listMovieAdapter, listNovelAdapter;
+    private ArrayList<ItemProductCard> listGameItem, listMovieItem, listNovelItem;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         discoverViewModel = new ViewModelProvider(this).get(DiscoverViewModel.class);
         View root = inflater.inflate(R.layout.fragment_discover, container, false);
 
+        mapping(root);
         requireLogin();
 
+        listGameItem = new ArrayList<>();
+        listMovieItem = new ArrayList<>();
+        listNovelItem = new ArrayList<>();
+
+        loadListRecentNovel();
+        loadListRecentMovie();
+        loadListRecentGame();
+
         return root;
+    }
+
+    private void mapping(View root){
+        listviewRecentGame = root.findViewById(R.id.listview_recent_game);
+        listviewRecentMovie = root.findViewById(R.id.listview_recent_movie);
+        listviewRecentNovel = root.findViewById(R.id.listview_recent_novel);
+    }
+
+    private void loadListRecentNovel() {
+        final String url = getResources().getString(R.string.server_url) + "/show/lastNovel/" + LIST_QUERY_SIZE;
+        RequestQueue reqQueue = Volley.newRequestQueue(getContext());
+        JsonArrayRequest jsonObjectRequest = new JsonArrayRequest(
+                Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                try {
+                    for (int i=0; i<response.length(); i++){
+                        JSONObject data = response.getJSONObject(i);
+                        listNovelItem.add(new ItemProductCard(
+                                data.getString("cover_img"),
+                                data.getString("name")
+                        ));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                listNovelAdapter = new ListProductCardRecycleAdapter(listNovelItem);
+                listviewRecentNovel.setHasFixedSize(true);
+                listviewRecentNovel.setLayoutManager(new GridLayoutManager(getContext(),GRID_COLUMN));
+                listviewRecentNovel.addItemDecoration(new GridSpacingItemDecoration(GRID_COLUMN, 20, true));
+                listviewRecentNovel.setAdapter(listNovelAdapter);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), "There's error when connect. "+ error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        reqQueue.add(jsonObjectRequest);
+    }
+
+    private void loadListRecentMovie() {
+        final String url = getResources().getString(R.string.server_url) + "/show/lastFilm/" + LIST_QUERY_SIZE;
+        RequestQueue reqQueue = Volley.newRequestQueue(getContext());
+        JsonArrayRequest jsonObjectRequest = new JsonArrayRequest(
+                Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                try {
+                    for (int i=0; i<response.length(); i++){
+                        JSONObject data = response.getJSONObject(i);
+                        listMovieItem.add(new ItemProductCard(
+                                data.getString("poster_img"),
+                                data.getString("name")
+                        ));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                listMovieAdapter = new ListProductCardRecycleAdapter(listMovieItem);
+                listviewRecentMovie.setHasFixedSize(true);
+                listviewRecentMovie.setLayoutManager(new GridLayoutManager(getContext(),GRID_COLUMN));
+                listviewRecentMovie.addItemDecoration(new GridSpacingItemDecoration(GRID_COLUMN, 20, true));
+                listviewRecentMovie.setAdapter(listMovieAdapter);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), "There's error when connect. "+ error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        reqQueue.add(jsonObjectRequest);
+    }
+
+    private void loadListRecentGame() {
+        final String url = getResources().getString(R.string.server_url) + "/show/lastGame/" + LIST_QUERY_SIZE;
+        RequestQueue reqQueue = Volley.newRequestQueue(getContext());
+        JsonArrayRequest jsonObjectRequest = new JsonArrayRequest(
+                Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                try {
+                    for (int i=0; i<response.length(); i++){
+                        JSONObject data = response.getJSONObject(i);
+                        listGameItem.add(new ItemProductCard(
+                                data.getString("header_img"),
+                                data.getString("name")
+                        ));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                listGameAdapter = new ListProductCardRecycleAdapter(listGameItem);
+                listviewRecentGame.setHasFixedSize(true);
+                listviewRecentGame.setLayoutManager(new GridLayoutManager(getContext(),GRID_COLUMN));
+                listviewRecentGame.addItemDecoration(new GridSpacingItemDecoration(GRID_COLUMN, 20, true));
+                listviewRecentGame.setAdapter(listGameAdapter);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), "There's error when connect. "+ error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        reqQueue.add(jsonObjectRequest);
     }
 
     private void requireLogin(){

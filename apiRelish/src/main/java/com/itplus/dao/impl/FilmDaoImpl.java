@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.itplus.entity.Film;
+import com.itplus.entity.Truyen;
 
 @Repository
 public class FilmDaoImpl implements FilmDao {
@@ -77,6 +78,9 @@ public class FilmDaoImpl implements FilmDao {
 
 	}
 
-	
-
+	@Override
+	public List<Film> getLatestProducts(int limit) {
+		String sql = "SELECT * FROM tbl_film_info ORDER BY release_date DESC LIMIT ?";
+		return jdbcTemplate.query(sql,new Object[] {limit}, new BeanPropertyRowMapper<Film>(Film.class));
+	}
 }

@@ -13,7 +13,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:paddingTop="8dp"
+            android:paddingBottom="64dp">
 
             <LinearLayout
                 android:id="@+id/linearLayout4"
@@ -24,6 +26,7 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
                 android:orientation="horizontal"
+                android:visibility="gone"
                 android:weightSum="3">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -214,39 +217,101 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="32dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp">
 
                 <ImageView
                     android:id="@+id/imageView2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:adjustViewBounds="true"
                     android:padding="4dp"
                     android:tint="@color/colorOnSurface"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintDimensionRatio="1"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/console" />
 
                 <TextView
                     android:id="@+id/textView6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginStart="8dp"
                     android:text="Các game mới nhất"
                     android:textColor="@color/colorOnSurface"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/imageView2"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    android:textSize="18sp" />
+            </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/listview_recent_game"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:adjustViewBounds="true"
+                    android:padding="4dp"
+                    android:tint="@color/colorOnSurface"
+                    app:srcCompat="@drawable/video" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="8dp"
+                    android:text="Các phim mới nhất"
+                    android:textColor="@color/colorOnSurface"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/listview_recent_movie"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="16dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
+
+                <ImageView
+                    android:id="@+id/imageView10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:adjustViewBounds="true"
+                    android:padding="4dp"
+                    android:tint="@color/colorOnSurface"
+                    app:srcCompat="@drawable/book_of_black_cover_closed" />
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="8dp"
+                    android:text="Các truyện mới nhất"
+                    android:textColor="@color/colorOnSurface"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/listview_recent_novel"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 

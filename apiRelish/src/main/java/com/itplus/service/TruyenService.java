@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.itplus.entity.Game;
 import com.itplus.entity.Truyen;
 @Service
 public interface TruyenService {
@@ -11,6 +12,7 @@ public interface TruyenService {
 	void addGTruyen(Truyen truyen);
 	void updateTruyen(Truyen truyen);
 	void deleteTruyen(int id);
+	List<Truyen> getLatestProducts(int limit);
 	Truyen getTruyenById(int id);
 	List<Truyen> findByName(String name);
 }
