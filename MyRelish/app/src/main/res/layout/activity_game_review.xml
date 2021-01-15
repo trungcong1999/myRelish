@@ -58,7 +58,7 @@
             app:layout_constraintDimensionRatio="1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/add" />
+            app:srcCompat="@drawable/profile_user" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ScrollView
@@ -83,7 +83,8 @@
                 android:layout_margin="16dp"
                 android:text="Herritage: Flowers for the fallen"
                 android:textAlignment="center"
-                android:textSize="18sp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -183,10 +184,21 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
+            <TextView
+                android:id="@+id/text_count_criteria"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:text="Bạn đã đánh giá game trên 10 tiêu chí"
+                android:textAlignment="center"
+                android:textSize="12sp" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/listview_criteria"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:paddingTop="8dp">
 
             </androidx.recyclerview.widget.RecyclerView>
 
@@ -220,7 +232,7 @@
                     android:layout_weight="1"
                     android:text="Thêm tiêu chí đánh giá"
                     android:textColor="@color/colorOnPrimary"
-                    android:textSize="18sp" />
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <TextView
@@ -228,10 +240,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Bài review của tôi"
+                android:text="Bài viết của tôi"
                 android:textAlignment="center"
                 android:textSize="18sp"
                 android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/text_count_review"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:text="Bạn đã có 15 bài viết về game"
+                android:textAlignment="center"
+                android:textSize="12sp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/listview_my_review"
@@ -268,9 +290,9 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
-                    android:text="Viết bài đánh giá mới"
+                    android:text="Viết bài viết mới"
                     android:textColor="@color/colorOnPrimary"
-                    android:textSize="18sp" />
+                    android:textSize="14sp" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

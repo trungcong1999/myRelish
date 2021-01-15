@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 import com.itplus.entity.Game;
+import com.itplus.entity.GameCriteriaReview;
+import com.itplus.entity.GameInfo;
+import com.itplus.entity.GameReviewArticle;
 import com.itplus.service.GameService;
 
 @RestController
@@ -68,49 +71,69 @@ public class GameRestController {
 	}
 	
 	//tìm theo tên game
-		@RequestMapping(value = "search/name/game/{name}")
-		public String getGameByName(HttpServletRequest request,@PathVariable String name) {
-			List<Game> games = gameService.findByName(name);
-			request.setAttribute("listGameName", games);
-			Gson gson = new Gson();
-			return gson.toJson(games);
-		}
+	@RequestMapping(value = "search/name/game/{name}", produces = "text/plain;charset=UTF-8")
+	public String getGameByName(HttpServletRequest request,@PathVariable String name) {
+		List<Game> games = gameService.findByName(name);
+		request.setAttribute("listGameName", games);
+		Gson gson = new Gson();
+		return gson.toJson(games);
+	}
 		
 	//Lấy sản phầm mới nhất
-		@RequestMapping(value = "show/lastGame/{limit}",method = RequestMethod.GET)
-		public String getLatesProductGame(HttpServletRequest request,@PathVariable int limit) {
-			List<Game> gameLates = gameService.getLatestProducts(limit);
-			request.setAttribute("listLatesProduct", gameLates);
-			Gson gson = new Gson();
-			return gson.toJson(gameLates);
-		}
+	@RequestMapping(value = "show/lastGame/{limit}",method = RequestMethod.GET)
+	public String getLatesProductGame(HttpServletRequest request,@PathVariable int limit) {
+		List<Game> gameLates = gameService.getLatestProducts(limit);
+		request.setAttribute("listLatesProduct", gameLates);
+		Gson gson = new Gson();
+		return gson.toJson(gameLates);
+	}
 		
 	//Hiện danh sách các game có cùng 1 tag
-		@RequestMapping(value = "game/tag/{id}")
-		public String getTagGame(@PathVariable int id) {
-			List<Game> tagList = gameService.getTagId(id);
-			Gson gson = new Gson();
-			return gson.toJson(tagList);
-		}
+	@RequestMapping(value = "game/tag/{id}")
+	public String getTagGame(@PathVariable int id) {
+		List<Game> tagList = gameService.getTagId(id);
+		Gson gson = new Gson();
+		return gson.toJson(tagList);
+	}
 		
 	//Lấy danh sách các game đã review của 1 người dùng (dựa vào id người dùng)
-		@RequestMapping(value = "game/reivew/user/{id}")
-		public String getReviewByIdUser(@PathVariable int id) {
-			List<Game> gamesIdUser = gameService.getReviewByIdUser(id);
-			Gson gson = new Gson();
-			return gson.toJson(gamesIdUser);
-		}
+	@RequestMapping(value = "game/reivew/user/{id}")
+	public String getReviewByIdUser(@PathVariable int id) {
+		List<Game> gamesIdUser = gameService.getReviewByIdUser(id);
+		Gson gson = new Gson();
+		return gson.toJson(gamesIdUser);
+	}
 		
 	//Lấy thông tin về 1 game dựa vào id,kèm theo overall_score của một số bài review ngẫu nhiên
-		@RequestMapping(value = "game/reivew/user/radom/{id}")
-		public String getRadomReviewById(@PathVariable int id) {
-			List<Game> gamesIdUser = gameService.getRadomReviewById(id);
-			Gson gson = new Gson();
-			return gson.toJson(gamesIdUser);
-		}
-		
-		
-		
+	@RequestMapping(value = "game/review/user/random/{id}")
+	public String getRadomReviewById(@PathVariable int id) {
+		List<Game> gamesIdUser = gameService.getRadomReviewById(id);
+		Gson gson = new Gson();
+		return gson.toJson(gamesIdUser);
+	}
 	
+	//Lấy thông tin về 1 game dựa vào id,kèm theo overall_score của một số bài review ngẫu nhiên
+	@RequestMapping(value = "game/info/{id}")
+	public String getGameInfoById(@PathVariable int id) {
+		GameInfo result = gameService.getGameInfoById(id);
+		Gson gson = new Gson();
+		return gson.toJson(result);
+	}
+		
+	// Lấy tất cả các tiêu chính mà người dùng có userId đã đánh giá về game có gameId
+	@RequestMapping(value = "game/{gameId}/user/{userId}/all-criteria-reviewed", produces = "text/plain;charset=UTF-8")
+	public String getAllCriteriaReviewed(@PathVariable int gameId, @PathVariable int userId) {
+		List<GameCriteriaReview> result = gameService.getAllCriteria(userId, gameId);
+		Gson gson = new Gson();
+		return gson.toJson(result);
+	}
+	
+	// Lấy tất cả các tiêu chính mà người dùng có userId đã đánh giá về game có gameId
+	@RequestMapping(value = "game/{gameId}/user/{userId}/all-review-articles", produces = "text/plain;charset=UTF-8")
+	public String getAllReviewArticle(@PathVariable int gameId, @PathVariable int userId) {
+		List<GameReviewArticle> result = gameService.getAllReviewArticles(userId, gameId);
+		Gson gson = new Gson();
+		return gson.toJson(result);
+	}
 }
 

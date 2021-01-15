@@ -16,6 +16,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.squareup.picasso.Picasso;
 
@@ -111,61 +112,62 @@ public class GameInfoActivity extends AppCompatActivity {
     }
 
     private void loadInfo(int id) {
-        final String url = getResources().getString(R.string.server_url) + "/search/name/game/" + id;
+        final String url = getResources().getString(R.string.server_url) + "/game/info/" + id;
         RequestQueue reqQueue = Volley.newRequestQueue(getBaseContext());
-        JsonArrayRequest jsonObjectRequest = new JsonArrayRequest(
-                Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-                try {
-                    if (response.length() <= 0){
-                        Toast.makeText(getBaseContext(), "Can't find game info", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                    JSONObject data = response.getJSONObject(0);
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONObject data = response;
 
-                    final String img_url = data.getString("header_img");
-                    Picasso.get().load(img_url).fit().centerCrop()
-                            .placeholder(R.drawable.loading_2)
-                            .error(R.drawable.set_video_game_doodle_6997_1231)
-                            .into(imageGameHeader);
+                            final String img_url = data.getString("header_img");
+                            Picasso.get().load(img_url).fit().centerCrop()
+                                    .placeholder(R.drawable.loading_2)
+                                    .error(R.drawable.set_video_game_doodle_6997_1231)
+                                    .into(imageGameHeader);
 
-                    textTitleTop.setText(data.getString("name"));
-                    textTitle.setText(data.getString("name"));
-                    textDescription.setText(data.getString("description"));
+                            textTitleTop.setText(data.getString("name"));
+                            textTitle.setText(data.getString("name"));
+                            textDescription.setText(data.getString("description"));
 
-                    textReleaseDate.setText(data.getString("release_date"));
-                    textDeveloper.setText(data.getString("developer_id"));
-                    textPublisher.setText(data.getString("publisher_id"));
+                            textReleaseDate.setText(data.getString("release_date"));
+                            textDeveloper.setText(data.getString("developer_name"));
+                            textPublisher.setText(data.getString("publisher_name"));
 
+                            textNumPeople.setText(data.getString("count_in_collection"));
+                            textNumReview.setText(data.getString("count_review_article"));
+                            textScore.setText(data.getDouble("score")+"");
 
+                            if (true || data.getBoolean("in_collection")){
+                                textIsGameInCollection.setText("Game đã có trong bộ sưu tập của bạn");
+                                btnActionButton.setVisibility(View.GONE);
 
-                    if (true || data.getBoolean("in_collection")){
-                        textIsGameInCollection.setText("Game đã có trong bộ sưu tập của bạn");
-                        btnActionButton.setVisibility(View.GONE);
+                                btnAddToCollection.setVisibility(View.GONE);
+                                btnGoToMyReview.setVisibility(View.VISIBLE);
 
-                        btnAddToCollection.setVisibility(View.GONE);
-                        btnGoToMyReview.setVisibility(View.VISIBLE);
-
-                        final int id = data.getInt("id");
-                        btnAddToCollection.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                gotoMyReview(v, id);
+                                final int id = data.getInt("id");
+                                btnAddToCollection.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        gotoMyReview(v, id);
+                                    }
+                                });
                             }
-                        });
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getBaseContext(), "There's error when connect. "+ error.toString(), Toast.LENGTH_SHORT).show();
+                    }
                 }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getBaseContext(), "There's error when connect. "+ error.toString(), Toast.LENGTH_SHORT).show();
-            }
-        });
-        reqQueue.add(jsonObjectRequest);
+        );
+        reqQueue.add(request);
     }
 
     public void addToCollection(View view){

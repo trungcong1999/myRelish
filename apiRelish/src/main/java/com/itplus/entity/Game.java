@@ -82,5 +82,4 @@ public class Game {
 	public void setDeveloper_id(int developer_id) {
 		this.developer_id = developer_id;
 	}
-	
 }

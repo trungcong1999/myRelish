@@ -10,7 +10,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import com.itplus.entity.CountObject;
+import com.itplus.entity.FloatValueObject;
 import com.itplus.entity.Game;
+import com.itplus.entity.GameCriteriaReview;
+import com.itplus.entity.GameReviewArticle;
 
 @Repository
 public class GameDaoImpl implements GameDao {
@@ -105,10 +109,39 @@ public class GameDaoImpl implements GameDao {
 		return jdbcTemplate.query(sql,new Object[] {id}, new BeanPropertyRowMapper<Game>(Game.class));
 	}
 
+	@Override
+	public List<GameCriteriaReview> getAllCriteria(int gameId, int userId) {
+		String sql = "SELECT tbl_game_rate_criteria.*, tbl_game_criteria.name AS criteria_name"
+				+ " FROM tbl_game_rate_criteria INNER JOIN tbl_game_criteria "
+				+ "ON tbl_game_rate_criteria.criteria_id=tbl_game_criteria.id "
+				+ "WHERE tbl_game_rate_criteria.game_id=? AND tbl_game_rate_criteria.user_id=?";
+		return jdbcTemplate.query(sql,new Object[] {gameId, userId}, new BeanPropertyRowMapper<GameCriteriaReview>(GameCriteriaReview.class));
+	}
 
+	@Override
+	public List<GameReviewArticle> getAllReviewArticles(int userId, int gameId) {
+		String sql = "SELECT * FROM tbl_game_review WHERE id_game=? AND id_user=?";
+		return jdbcTemplate.query(sql,new Object[] {gameId, userId}, new BeanPropertyRowMapper<GameReviewArticle>(GameReviewArticle.class));
+	}
 
+	@Override
+	public CountObject countReviewArticlesByGameId(int gameId) {
+		String sql = "SELECT COUNT(id) AS count_value FROM tbl_game_review WHERE id_game=?";
+		return jdbcTemplate.queryForObject(sql,new Object[] {gameId}, new BeanPropertyRowMapper<CountObject>(CountObject.class));
+	}
 
+	@Override
+	public CountObject countInPeopleCollectionByGameId(int gameId) {
+		String sql = "SELECT COUNT(DISTINCT tbl_union.user_id) AS count_value FROM\r\n" + 
+				"((SELECT id_user as user_id, id_game as game_id FROM tbl_game_review WHERE id_game=?)\r\n" + 
+				"UNION ALL\r\n" + 
+				"(SELECT user_id, game_id FROM tbl_game_rate_criteria WHERE game_id=?)) AS tbl_union";
+		return jdbcTemplate.queryForObject(sql,new Object[] {gameId, gameId}, new BeanPropertyRowMapper<CountObject>(CountObject.class));
+	}
 
-	
-
+	@Override
+	public FloatValueObject getAverageScoreByGameId(int gameId) {
+		String sql = "SELECT AVG(score) AS value FROM tbl_game_rate_criteria WHERE game_id=?";
+		return jdbcTemplate.queryForObject(sql,new Object[] {gameId}, new BeanPropertyRowMapper<FloatValueObject>(FloatValueObject.class));
+	}
 }
