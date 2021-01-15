@@ -13,7 +13,7 @@ public interface GameDao {
 	void addGame(Game game);
 	void updateGame(Game game);
 	void deleteGame(int id);
-	Game getGameById(int id);
+	List<Game> getGameById(int id);
 	List<Game> findByName(String name);
 	List<Game> getLatestProducts(int limit);
 	List<Game> getTagId(int id);
@@ -25,5 +25,5 @@ public interface GameDao {
 	CountObject countReviewArticlesByGameId(int gameId);
 	CountObject countInPeopleCollectionByGameId(int gameId);
 	FloatValueObject getAverageScoreByGameId(int gameId);
-
+	CountObject checkIsGameInCollection(int gameId, int userId);
 }

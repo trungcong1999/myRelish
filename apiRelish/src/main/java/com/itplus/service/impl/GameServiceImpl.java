@@ -48,8 +48,7 @@ public class GameServiceImpl implements GameService{
 	}
 
 	@Override
-	public Game getGameById(int id) {
-		// TODO Auto-generated method stub
+	public List<Game> getGameById(int id) {
 		return gameDao.getGameById(id);
 	}
 
@@ -87,7 +86,9 @@ public class GameServiceImpl implements GameService{
 	
 	@Override
 	public GameInfo getGameInfoById(int gameId) {
-		Game game = gameDao.getGameById(gameId);
+		List<Game> result = gameDao.getGameById(gameId);
+		if (result.size() <= 0) return null;
+		Game game = result.get(0);
 		Creator developer = creatorDao.getById(game.getDeveloper_id());
 		Creator publisher = creatorDao.getById(game.getPublisher_id());
 		CountObject countReviewArticles = gameDao.countReviewArticlesByGameId(gameId);
@@ -110,13 +111,16 @@ public class GameServiceImpl implements GameService{
 
 	@Override
 	public List<GameCriteriaReview> getAllCriteria(int userId, int gameId) {
-		// TODO Auto-generated method stub
 		return gameDao.getAllCriteria(userId, gameId);
 	}
 
 	@Override
 	public List<GameReviewArticle> getAllReviewArticles(int userId, int gameId) {
-		// TODO Auto-generated method stub
 		return gameDao.getAllReviewArticles(userId, gameId);
+	}
+
+	@Override
+	public CountObject checkIsGameInCollecion(int userId, int gameId) {
+		return gameDao.checkIsGameInCollection(gameId, userId);
 	}
 }

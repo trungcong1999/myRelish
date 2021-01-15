@@ -2,6 +2,8 @@ package com.itplus.entity;
 
 import javax.validation.constraints.NotNull;
 
+import org.springframework.lang.Nullable;
+
 public class GameInfo {
 	private int id;
 	@NotNull
@@ -14,9 +16,11 @@ public class GameInfo {
 	private String description;
 	@NotNull
 	private String header_img;
-	
+	@Nullable
 	private String publisher_name;
+	@Nullable
 	private String developer_name;
+	
 	private int count_in_collection;
 	private int count_review_article;
 	private float score;

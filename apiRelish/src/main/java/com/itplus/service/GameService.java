@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.itplus.entity.CountObject;
 import com.itplus.entity.Game;
 import com.itplus.entity.GameCriteriaReview;
 import com.itplus.entity.GameInfo;
@@ -14,7 +15,7 @@ public interface GameService {
 	void addGame(Game game);
 	void updateGame(Game game);
 	void deleteGame(int id);
-	Game getGameById(int id);
+	List<Game> getGameById(int id);
 	List<Game> findByName(String name);
 	List<Game> getLatestProducts(int limit);
 	List<Game> getTagId(int id);
@@ -24,4 +25,5 @@ public interface GameService {
 	GameInfo getGameInfoById(int gameId);
 	List<GameCriteriaReview> getAllCriteria(int userId, int gameId);
 	List<GameReviewArticle> getAllReviewArticles(int userId, int gameId);
+	CountObject checkIsGameInCollecion(int userId, int gameId);
 }

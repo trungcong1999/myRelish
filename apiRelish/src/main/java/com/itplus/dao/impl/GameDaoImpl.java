@@ -1,5 +1,6 @@
 package com.itplus.dao.impl;
 
+import java.io.Console;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -68,10 +69,9 @@ public class GameDaoImpl implements GameDao {
 	}
 
 	@Override
-	public Game getGameById(int id) {
-		// TODO Auto-generated method stub
+	public List<Game> getGameById(int id) {
 		String sql = "Select * from tbl_game_info WHERE id = ?";
-		return jdbcTemplate.queryForObject(sql, new Object[] { id }, new BeanPropertyRowMapper<Game>(Game.class));
+		return jdbcTemplate.query(sql, new Object[] { id }, new BeanPropertyRowMapper<Game>(Game.class));
 	}
 
 	@Override
@@ -143,5 +143,12 @@ public class GameDaoImpl implements GameDao {
 	public FloatValueObject getAverageScoreByGameId(int gameId) {
 		String sql = "SELECT AVG(score) AS value FROM tbl_game_rate_criteria WHERE game_id=?";
 		return jdbcTemplate.queryForObject(sql,new Object[] {gameId}, new BeanPropertyRowMapper<FloatValueObject>(FloatValueObject.class));
+	}
+
+	@Override
+	public CountObject checkIsGameInCollection(int gameId, int userId) {
+		String sql = "SELECT (EXISTS(SELECT * FROM tbl_game_review WHERE id_game=? AND id_user=?)\r\n" + 
+				"OR EXISTS(SELECT * FROM tbl_game_rate_criteria WHERE game_id=? AND user_id=?)) AS count_value";
+		return jdbcTemplate.queryForObject(sql,new Object[] {gameId,userId,gameId,userId}, new BeanPropertyRowMapper<CountObject>(CountObject.class));
 	}
 }

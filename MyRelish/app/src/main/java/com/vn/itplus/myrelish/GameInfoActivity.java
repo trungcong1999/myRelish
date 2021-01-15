@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -65,50 +67,21 @@ public class GameInfoActivity extends AppCompatActivity {
         mapping();
 
         loadInfo(1);
-        loadCount(1);
         loadOtherReviews(1);
+        checkGameInCollection(1,1);
 
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        int userId = preferences.getInt("userId", -1);
         int gameId = getIntent().getIntExtra("id", -1);
         if (gameId >= 0){
             loadInfo(gameId);
-            loadCount(gameId);
             loadOtherReviews(gameId);
+            checkGameInCollection(gameId,userId);
         }
     }
 
     private void loadOtherReviews(int id) {
 
-    }
-
-    private void loadCount(int id) {
-        final String url = getResources().getString(R.string.server_url) + "/search/name/game/count/" + id;
-        RequestQueue reqQueue = Volley.newRequestQueue(getBaseContext());
-        JsonArrayRequest jsonObjectRequest = new JsonArrayRequest(
-                Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-                try {
-                    if (response.length() <= 0){
-                        Toast.makeText(getBaseContext(), "Can't find game info", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                    JSONObject data = response.getJSONObject(0);
-
-                    textNumPeople.setText(0);
-                    textNumReview.setText(0);
-                    textScore.setText(0);
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getBaseContext(), "There's error when connect. "+ error.toString(), Toast.LENGTH_SHORT).show();
-            }
-        });
-        reqQueue.add(jsonObjectRequest);
     }
 
     private void loadInfo(int id) {
@@ -139,8 +112,37 @@ public class GameInfoActivity extends AppCompatActivity {
                             textNumPeople.setText(data.getString("count_in_collection"));
                             textNumReview.setText(data.getString("count_review_article"));
                             textScore.setText(data.getDouble("score")+"");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getBaseContext(), "There's error when connect. "+ error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+        reqQueue.add(request);
+    }
 
-                            if (true || data.getBoolean("in_collection")){
+    private void checkGameInCollection(int gameId, int userId){
+        if (userId < 0){
+            return;
+        }
+
+        final String url = getResources().getString(R.string.server_url) + "/game/"+gameId+"/user/"+userId+"/check-is-in-collection";
+        RequestQueue reqQueue = Volley.newRequestQueue(getBaseContext());
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONObject data = response;
+
+                            if (data.getInt("count_value")>0){
                                 textIsGameInCollection.setText("Game đã có trong bộ sưu tập của bạn");
                                 btnActionButton.setVisibility(View.GONE);
 
