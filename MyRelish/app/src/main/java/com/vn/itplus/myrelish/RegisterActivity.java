@@ -32,7 +32,7 @@ public class RegisterActivity extends AppCompatActivity {
     private ProgressDialog pDialog;
     public static final String REGISTER_URL = "http://localhost:8080/apiRelish/user/register";
 
-    public static final String KEY_USERNAME = "username";
+    public static final String KEY_USERNAME = "name";
     public static final String KEY_PASSWORD = "password";
     public static final String KEY_EMAIL = "email";
     @Override
@@ -52,14 +52,12 @@ public class RegisterActivity extends AppCompatActivity {
                 if(editPass.getText().length()<8){
                     Toast.makeText(RegisterActivity.this, "Password phải lớn hơn 8 ký tự", Toast.LENGTH_SHORT).show();
                 }else{
-                    if (!editPass.getText().equals(editRepass.getText())){
-                        Toast.makeText(RegisterActivity.this, "Re-Password không đúng", Toast.LENGTH_SHORT).show();
-                    }else{
-                        String username = editName.getText().toString().trim();
+
+                        String name = editName.getText().toString().trim();
                         String password = editPass.getText().toString().trim();
                         String email = editEmail.getText().toString().trim();
-                        registerUser(username,password,email);
-                    }
+                        registerUser(name,password,email);
+
                 }
             }
         });
@@ -80,7 +78,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
         return false;
     }
-    private void registerUser(final String username, final String password, final String email) {
+    private void registerUser(final String name, final String password, final String email) {
 
         if (checkEditText(editName) && checkEditText(editPass) && checkEditText(editEmail) && isValidEmail(email)) {
             pDialog.show();
@@ -119,7 +117,7 @@ public class RegisterActivity extends AppCompatActivity {
                 @Override
                 protected Map<String, String> getParams() {
                     Map<String, String> params = new HashMap<>();
-                    params.put(KEY_USERNAME, username);
+                    params.put(KEY_USERNAME, name);
                     params.put(KEY_PASSWORD, password);
                     params.put(KEY_EMAIL, email);
                     return params;
