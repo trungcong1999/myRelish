@@ -11,4 +11,5 @@ public interface ReviewService {
 	List<Review> getReviewById(int id);
 	List<Review> getNumberReview(int id);
 	List<Review> getNumberUserReview(int id);
+	List<Review> getLatestReview(int limit);
 }

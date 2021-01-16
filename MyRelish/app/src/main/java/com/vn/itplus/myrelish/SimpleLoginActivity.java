@@ -3,6 +3,8 @@ package com.vn.itplus.myrelish;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.app.DownloadManager;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,10 +14,31 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 public class SimpleLoginActivity extends AppCompatActivity {
     private EditText loginEmail;
     private EditText loginPassword;
     private TextView loginMessage;
+    private ProgressDialog pDialog;
+
+    private static final String KEY_PASSWORD = "password";
+    private static final String KEY_EMAIL = "email";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,15 +48,60 @@ public class SimpleLoginActivity extends AppCompatActivity {
         loginEmail = findViewById(R.id.login_email);
         loginPassword = findViewById(R.id.login_password);
         loginMessage = findViewById(R.id.login_message);
+
+        pDialog = new ProgressDialog(this);
+        pDialog.setMessage("Đang xử lý đăng nhập...");
+        pDialog.setCanceledOnTouchOutside(false);
     }
 
     public void login(View view){
         // send login request to server
-        if ("vqd9x".equals(loginEmail.getText().toString()) && "123456".equals(loginPassword.getText().toString())){
-            onLoginSuccess(1);
-        }else{
-            onLoginFailed();
-        }
+        final String email = loginEmail.getText().toString();
+        final String password = loginPassword.getText().toString();
+
+        String url = getResources().getString(R.string.server_url)+"/user/api/login";
+
+        pDialog.show();
+
+        StringRequest loginRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        pDialog.dismiss();
+                        Toast.makeText(getBaseContext(), response, Toast.LENGTH_SHORT).show();
+                        try{
+                            JSONObject jsonResult = new JSONObject(response);
+                            if (jsonResult.has("id")){
+                                onLoginSuccess(jsonResult.getInt("id"));
+                            }else{
+//                                Toast.makeText(getBaseContext(), jsonResult.getString("message"), Toast.LENGTH_SHORT).show();
+                                onLoginFailed();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getBaseContext(), "errorResponse "+error, Toast.LENGTH_SHORT).show();
+                        pDialog.dismiss();
+                        onLoginFailed();
+                    }
+                }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put(KEY_EMAIL, email);
+                params.put(KEY_PASSWORD, password);
+                return params;
+            }
+
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(loginRequest);
     }
     public void dontLogin(View view){
         Intent intent = new Intent();

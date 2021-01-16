@@ -22,7 +22,7 @@ public class TruyenRestController {
 	TruyenService truyenService;
 
 	// Danh sách tất cả Truyện
-	@RequestMapping(value = "search/name/truyen/", method = RequestMethod.GET)
+	@RequestMapping(value = "search/name/truyen/", method = RequestMethod.GET, produces = "text/plain;charset=UTF-8")
 	public String getTruyenList(HttpServletRequest request) {
 		List<Truyen> list = truyenService.getAll();
 		request.setAttribute("listTruyen", list);
@@ -68,7 +68,7 @@ public class TruyenRestController {
 	}
 
 	// tìm theo tên Truyện
-	@RequestMapping(value = "search/name/truyen/{name}")
+	@RequestMapping(value = "search/name/truyen/{name}", produces = "text/plain;charset=UTF-8")
 	public String getTruyenByName(HttpServletRequest request, @PathVariable String name) {
 		List<Truyen> truyens = truyenService.findByName(name);
 		request.setAttribute("listTruyenName", truyens);
@@ -77,7 +77,7 @@ public class TruyenRestController {
 	}
 
 	//Lấy sản phầm mới nhất
-	@RequestMapping(value = "show/lastNovel/{limit}",method = RequestMethod.GET)
+	@RequestMapping(value = "show/lastNovel/{limit}",method = RequestMethod.GET, produces = "text/plain;charset=UTF-8")
 	public String getLatesProductGame(HttpServletRequest request,@PathVariable int limit) {
 		List<Truyen> gameLates = truyenService.getLatestProducts(limit);
 		request.setAttribute("listLatesProduct", gameLates);

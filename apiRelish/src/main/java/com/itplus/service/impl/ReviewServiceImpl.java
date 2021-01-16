@@ -29,5 +29,9 @@ public class ReviewServiceImpl implements ReviewService{
 		// TODO Auto-generated method stub
 		return reviewDao.getNumberUserReview(id);
 	}
+	@Override
+	public List<Review> getLatestReview(int limit) {
+		return reviewDao.getLatestReview(limit);
+	}
 
 }

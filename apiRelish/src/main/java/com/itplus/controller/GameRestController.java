@@ -25,7 +25,7 @@ public class GameRestController {
 	GameService gameService;
 
 	//Danh sách tất cả các game
-	@RequestMapping(value = "search/name/game/", method = RequestMethod.GET)
+	@RequestMapping(value = "search/name/game/", method = RequestMethod.GET, produces = "text/plain;charset=UTF-8")
 	public String getGameList(HttpServletRequest request) {
 		List<Game> list = gameService.getAll();
 		request.setAttribute("listGame", list);
@@ -60,7 +60,7 @@ public class GameRestController {
 	}
 
 	//Xóa Game
-	@RequestMapping(value = "ws-delete-game/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "ws-delete-game/{id}", method = RequestMethod.GET, produces = "text/plain;charset=UTF-8")
 	public String delete(@PathVariable("id") int id) {
 		try {
 			gameService.deleteGame(id);
@@ -81,7 +81,7 @@ public class GameRestController {
 	}
 		
 	//Lấy sản phầm mới nhất
-	@RequestMapping(value = "show/lastGame/{limit}",method = RequestMethod.GET)
+	@RequestMapping(value = "show/lastGame/{limit}",method = RequestMethod.GET, produces = "text/plain;charset=UTF-8")
 	public String getLatesProductGame(HttpServletRequest request,@PathVariable int limit) {
 		List<Game> gameLates = gameService.getLatestProducts(limit);
 		request.setAttribute("listLatesProduct", gameLates);
@@ -90,7 +90,7 @@ public class GameRestController {
 	}
 		
 	//Hiện danh sách các game có cùng 1 tag
-	@RequestMapping(value = "game/tag/{id}")
+	@RequestMapping(value = "game/tag/{id}", produces = "text/plain;charset=UTF-8")
 	public String getTagGame(HttpServletRequest request, @PathVariable int id) {
 		List<Game> tagList = gameService.getTagId(id);
 		Gson gson = new Gson();
@@ -98,7 +98,7 @@ public class GameRestController {
 	}
 		
 	//Lấy danh sách các game đã review của 1 người dùng (dựa vào id người dùng)
-	@RequestMapping(value = "game/reivew/user/{id}")
+	@RequestMapping(value = "game/reivew/user/{id}", produces = "text/plain;charset=UTF-8")
 	public String getReviewByIdUser(HttpServletRequest request, @PathVariable int id) {
 		List<Game> gamesIdUser = gameService.getReviewByIdUser(id);
 		Gson gson = new Gson();
@@ -106,16 +106,16 @@ public class GameRestController {
 	}
 		
 	//Lấy thông tin về 1 game dựa vào id,kèm theo overall_score của một số bài review ngẫu nhiên
-	@RequestMapping(value = "game/review/user/random/{id}")
+	@RequestMapping(value = "game/review/user/random/{id}", produces = "text/plain;charset=UTF-8")
 	public String getRadomReviewById(HttpServletRequest request, @PathVariable int id) {
 		List<Game> gamesIdUser = gameService.getRadomReviewById(id);
 		Gson gson = new Gson();
 		return gson.toJson(gamesIdUser);
 	}
 	
-	@RequestMapping(value = "game/info/{gameId}",method = RequestMethod.GET)
-	public String getGameInfoById(HttpServletRequest request, @PathVariable int gameId) {
-		GameInfo result = gameService.getGameInfoById(gameId);
+	@RequestMapping(value = "game/info/{gameid}",method = RequestMethod.GET, produces = "text/plain;charset=UTF-8")
+	public String getGameInfoById(HttpServletRequest request, @PathVariable int gameid) {
+		GameInfo result = gameService.getGameInfoById(gameid);
 		Gson gson = new Gson();
 		return gson.toJson(result);
 	}

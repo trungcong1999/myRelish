@@ -22,7 +22,7 @@ public class FilmRestController {
 	FilmService filmService;
 
 	// Danh sách tất cả các phim
-	@RequestMapping(value = "search/name/film/", method = RequestMethod.GET)
+	@RequestMapping(value = "search/name/film/", method = RequestMethod.GET, produces = "text/plain;charset=UTF-8")
 	public String getFilmList(HttpServletRequest request) {
 		List<Film> list = filmService.getAll();
 		request.setAttribute("listFilm", list);
@@ -56,7 +56,7 @@ public class FilmRestController {
 	}
 
 	// xóa phim theo id
-	@RequestMapping(value = "ws-delete-film/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "ws-delete-film/{id}", method = RequestMethod.GET, produces = "text/plain;charset=UTF-8")
 	public String delete(@PathVariable("id") int id) {
 		try {
 			filmService.deleteFilm(id);
@@ -68,7 +68,7 @@ public class FilmRestController {
 	}
 
 	// tìm theo tên phim
-	@RequestMapping(value = "search/name/film/{name}")
+	@RequestMapping(value = "search/name/film/{name}", produces = "text/plain;charset=UTF-8")
 	public String getFilmByName(HttpServletRequest request, @PathVariable String name) {
 		List<Film> films = filmService.findByName(name);
 		request.setAttribute("listFilmName", films);
@@ -77,7 +77,7 @@ public class FilmRestController {
 	}
 
 	//Lấy sản phầm mới nhất
-	@RequestMapping(value = "show/lastFilm/{limit}",method = RequestMethod.GET)
+	@RequestMapping(value = "show/lastFilm/{limit}", produces = "text/plain;charset=UTF-8")
 	public String getLatesProductGame(HttpServletRequest request,@PathVariable int limit) {
 		List<Film> gameLates = filmService.getLatestProducts(limit);
 		request.setAttribute("listLatesProduct", gameLates);

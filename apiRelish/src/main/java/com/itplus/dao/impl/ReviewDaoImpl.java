@@ -34,4 +34,10 @@ public class ReviewDaoImpl implements ReviewDao{
 		return jdbcTemplate.query(sql,new Object[] {id}, new BeanPropertyRowMapper<Review>(Review.class));
 	}
 
+	@Override
+	public List<Review> getLatestReview(int limit) {
+		String sql = "SELECT * FROM tbl_game_review ORDER BY created_time DESC LIMIT ?";
+		return jdbcTemplate.query(sql,new Object[] {limit}, new BeanPropertyRowMapper<Review>(Review.class));
+	}
+
 }
