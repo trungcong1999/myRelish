@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -24,9 +25,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.vn.itplus.myrelish.GameInfoActivity;
+import com.vn.itplus.myrelish.GameReviewActivity;
 import com.vn.itplus.myrelish.R;
 import com.vn.itplus.myrelish.SimpleLoginActivity;
 import com.vn.itplus.myrelish.decorator.GridSpacingItemDecoration;
+import com.vn.itplus.myrelish.decorator.RecyclerItemClickListener;
 import com.vn.itplus.myrelish.dto.ItemProductCard;
 import com.vn.itplus.myrelish.viewAdapter.ListProductCardRecycleAdapter;
 
@@ -57,8 +61,25 @@ public class DiscoverFragment extends Fragment {
         requireLogin();
 
         listGameItem = new ArrayList<>();
+        listGameAdapter = new ListProductCardRecycleAdapter(listGameItem);
+        listviewRecentGame.setHasFixedSize(true);
+        listviewRecentGame.setLayoutManager(new GridLayoutManager(getContext(),GRID_COLUMN));
+        listviewRecentGame.addItemDecoration(new GridSpacingItemDecoration(GRID_COLUMN, 20, true));
+        listviewRecentGame.setAdapter(listGameAdapter);
+
         listMovieItem = new ArrayList<>();
+        listMovieAdapter = new ListProductCardRecycleAdapter(listMovieItem);
+        listviewRecentMovie.setHasFixedSize(true);
+        listviewRecentMovie.setLayoutManager(new GridLayoutManager(getContext(),GRID_COLUMN));
+        listviewRecentMovie.addItemDecoration(new GridSpacingItemDecoration(GRID_COLUMN, 20, true));
+        listviewRecentMovie.setAdapter(listMovieAdapter);
+
         listNovelItem = new ArrayList<>();
+        listNovelAdapter = new ListProductCardRecycleAdapter(listNovelItem);
+        listviewRecentNovel.setHasFixedSize(true);
+        listviewRecentNovel.setLayoutManager(new GridLayoutManager(getContext(),GRID_COLUMN));
+        listviewRecentNovel.addItemDecoration(new GridSpacingItemDecoration(GRID_COLUMN, 20, true));
+        listviewRecentNovel.setAdapter(listNovelAdapter);
 
         loadListRecentNovel();
         loadListRecentMovie();
@@ -84,19 +105,29 @@ public class DiscoverFragment extends Fragment {
                     for (int i=0; i<response.length(); i++){
                         JSONObject data = response.getJSONObject(i);
                         listNovelItem.add(new ItemProductCard(
+                                data.getInt("id"),
                                 data.getString("cover_img"),
                                 data.getString("name")
                         ));
                     }
+                    listNovelAdapter.notifyDataSetChanged();
+                    listviewRecentNovel.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), listviewRecentNovel,
+                            new RecyclerItemClickListener.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(View view, int position) {
+                                    // start novel info activity
+                                }
+
+                                @Override
+                                public void onItemLongClick(View view, int position) {
+                                    // pass
+                                }
+                            }));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
-                listNovelAdapter = new ListProductCardRecycleAdapter(listNovelItem);
-                listviewRecentNovel.setHasFixedSize(true);
-                listviewRecentNovel.setLayoutManager(new GridLayoutManager(getContext(),GRID_COLUMN));
-                listviewRecentNovel.addItemDecoration(new GridSpacingItemDecoration(GRID_COLUMN, 20, true));
-                listviewRecentNovel.setAdapter(listNovelAdapter);
+
             }
         }, new Response.ErrorListener() {
             @Override
@@ -118,6 +149,7 @@ public class DiscoverFragment extends Fragment {
                     for (int i=0; i<response.length(); i++){
                         JSONObject data = response.getJSONObject(i);
                         listMovieItem.add(new ItemProductCard(
+                                data.getInt("id"),
                                 data.getString("poster_img"),
                                 data.getString("name")
                         ));
@@ -125,12 +157,19 @@ public class DiscoverFragment extends Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                listMovieAdapter.notifyDataSetChanged();
+                listviewRecentMovie.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), listviewRecentMovie,
+                        new RecyclerItemClickListener.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(View view, int position) {
+                                // start film info activity
+                            }
 
-                listMovieAdapter = new ListProductCardRecycleAdapter(listMovieItem);
-                listviewRecentMovie.setHasFixedSize(true);
-                listviewRecentMovie.setLayoutManager(new GridLayoutManager(getContext(),GRID_COLUMN));
-                listviewRecentMovie.addItemDecoration(new GridSpacingItemDecoration(GRID_COLUMN, 20, true));
-                listviewRecentMovie.setAdapter(listMovieAdapter);
+                            @Override
+                            public void onItemLongClick(View view, int position) {
+                                // pass
+                            }
+                        }));
             }
         }, new Response.ErrorListener() {
             @Override
@@ -152,6 +191,7 @@ public class DiscoverFragment extends Fragment {
                     for (int i=0; i<response.length(); i++){
                         JSONObject data = response.getJSONObject(i);
                         listGameItem.add(new ItemProductCard(
+                                data.getInt("id"),
                                 data.getString("header_img"),
                                 data.getString("name")
                         ));
@@ -159,12 +199,21 @@ public class DiscoverFragment extends Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                listGameAdapter.notifyDataSetChanged();
+                listviewRecentGame.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), listviewRecentGame,
+                        new RecyclerItemClickListener.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(View view, int position) {
+                                Intent intent = new Intent(getContext(), GameInfoActivity.class);
+                                intent.putExtra("id", listGameItem.get(position).getId());
+                                startActivity(intent);
+                            }
 
-                listGameAdapter = new ListProductCardRecycleAdapter(listGameItem);
-                listviewRecentGame.setHasFixedSize(true);
-                listviewRecentGame.setLayoutManager(new GridLayoutManager(getContext(),GRID_COLUMN));
-                listviewRecentGame.addItemDecoration(new GridSpacingItemDecoration(GRID_COLUMN, 20, true));
-                listviewRecentGame.setAdapter(listGameAdapter);
+                            @Override
+                            public void onItemLongClick(View view, int position) {
+                                // pass
+                            }
+                        }));
             }
         }, new Response.ErrorListener() {
             @Override

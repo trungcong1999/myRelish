@@ -19,6 +19,9 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -28,7 +31,6 @@ public class RegisterActivity extends AppCompatActivity {
     EditText editName,editEmail,editPass,editRepass;
     Button btnCreate,btnClose;
     private ProgressDialog pDialog;
-    public static final String REGISTER_URL = "http://192.168.1.103:8080/apiRelish/pages/user/add";
 
     public static final String KEY_USERNAME = "name";
     public static final String KEY_PASSWORD = "password";
@@ -82,19 +84,25 @@ public class RegisterActivity extends AppCompatActivity {
         return false;
     }
     private void registerUser(final String name, final String password, final String email) {
-
+        final String url = getResources().getString(R.string.server_url)+"/user/api/register";
         if (checkEditText(editName) && checkEditText(editPass) && checkEditText(editEmail) && isValidEmail(email)) {
             pDialog.show();
-            StringRequest registerRequest = new StringRequest(Request.Method.POST, REGISTER_URL,
+            StringRequest registerRequest = new StringRequest(Request.Method.POST, url,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
-
-                            Intent intent = new Intent(RegisterActivity.this, SimpleLoginActivity.class);
-                            startActivity(intent);
-
-
                             pDialog.dismiss();
+                            try{
+                                JSONObject jsonResult = new JSONObject(response);
+                                if(jsonResult.getBoolean("result")){
+                                    Toast.makeText(getBaseContext(), "Register Successfully", Toast.LENGTH_SHORT).show();
+                                    finish();
+                                }else{
+                                    Toast.makeText(getBaseContext(), jsonResult.getString("message"), Toast.LENGTH_SHORT).show();
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         }
                     },
                     new Response.ErrorListener() {
@@ -130,8 +138,8 @@ public class RegisterActivity extends AppCompatActivity {
         editEmail = findViewById(R.id.txt_email_r);
         editPass = findViewById(R.id.txt_pass_r);
         editRepass = findViewById(R.id.txt_Rpass_r);
-        btnCreate = findViewById(R.id.btn_cacount);
-        btnClose = findViewById(R.id.btnClose);
+        btnCreate = findViewById(R.id.btn_create_account);
+        btnClose = findViewById(R.id.btn_skip);
         pDialog = new ProgressDialog(this);
         pDialog.setMessage("Đang đăng ký...");
         pDialog.setCanceledOnTouchOutside(false);

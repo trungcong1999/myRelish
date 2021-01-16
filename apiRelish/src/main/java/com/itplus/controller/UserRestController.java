@@ -95,4 +95,13 @@ public class UserRestController {
 		Gson gson = new Gson();
 		return gson.toJson(resultJson);
 	}
+	
+	@RequestMapping(value = "user/api/register", method = RequestMethod.POST)
+	public String registerFromAPI(HttpServletRequest request) {
+		JsonObject resultJson = new JsonObject();
+		resultJson.addProperty("result", true);
+		resultJson.addProperty("message", "Failed to register!");
+		Gson gson = new Gson();
+		return gson.toJson(resultJson);
+	}
 }

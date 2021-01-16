@@ -66,10 +66,6 @@ public class GameInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game_info);
         mapping();
 
-        loadInfo(1);
-        loadOtherReviews(1);
-        checkGameInCollection(1,1);
-
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         int userId = preferences.getInt("userId", -1);
         int gameId = getIntent().getIntExtra("id", -1);

@@ -31,6 +31,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+
 public class ProfileFragment extends Fragment {
     private TextView txt_username;
     private TextView txt_userBirthDay;
@@ -44,6 +46,10 @@ public class ProfileFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         profileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
         View root = inflater.inflate(R.layout.fragment_profile, container, false);
+
+        txt_username = root.findViewById(R.id.profile_username);
+        txt_userBirthDay = root.findViewById(R.id.profile_birthday);
+        txt_userBio = root.findViewById(R.id.profile_bio);
 
         root.findViewById(R.id.btn_more_game_collection).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,7 +71,7 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), CollectionActivity.class);
-                intent.putExtra("FirstTab", 4);
+                intent.putExtra("FirstTab", 2);
                 startActivity(intent);
             }
         });
@@ -146,7 +152,10 @@ public class ProfileFragment extends Fragment {
                         return;
                     }
                     JSONObject profileData = response.getJSONObject(0);
-                    Toast.makeText(getActivity(), profileData.toString(), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity(), profileData.toString(), Toast.LENGTH_SHORT).show();
+                    txt_username.setText(profileData.getString("name"));
+                    txt_userBirthDay.setText(profileData.getString("birthday"));
+                    txt_userBio.setText(profileData.getString("bio"));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

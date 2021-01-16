@@ -1,5 +1,6 @@
 package com.vn.itplus.myrelish.ui.search;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,8 +24,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.vn.itplus.myrelish.GameInfoActivity;
 import com.vn.itplus.myrelish.R;
 import com.vn.itplus.myrelish.decorator.GridSpacingItemDecoration;
+import com.vn.itplus.myrelish.decorator.RecyclerItemClickListener;
 import com.vn.itplus.myrelish.dto.ItemProductCard;
 import com.vn.itplus.myrelish.viewAdapter.ListProductCardRecycleAdapter;
 
@@ -53,6 +56,8 @@ public class SearchFragment extends Fragment {
     private ArrayList<ItemProductCard> listItemSearchResult;
     private ListProductCardRecycleAdapter searchResultAdapter;
 
+    private RecyclerItemClickListener onclickListener;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         searchViewModel = new ViewModelProvider(this).get(SearchViewModel.class);
@@ -68,6 +73,20 @@ public class SearchFragment extends Fragment {
         listviewResult.setAdapter(searchResultAdapter);
 
         toggleConfig(root);
+        onclickListener = new RecyclerItemClickListener(getContext(), listviewResult,
+                new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        Intent intent = new Intent(getContext(), GameInfoActivity.class);
+                        intent.putExtra("id", listItemSearchResult.get(position).getId());
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onItemLongClick(View view, int position) {
+                        // pass
+                    }
+                });
 
         return root;
     }
@@ -153,6 +172,7 @@ public class SearchFragment extends Fragment {
                     for (int i=0; i<response.length(); i++){
                         JSONObject data = response.getJSONObject(i);
                         listItemSearchResult.add(new ItemProductCard(
+                                data.getInt("id"),
                                 data.getString("header_img"),
                                 data.getString("name")
                         ));
@@ -162,6 +182,8 @@ public class SearchFragment extends Fragment {
                 }
                 textSearchMessage.setText("Tìm thấy "+listItemSearchResult.size()+" game");
                 searchResultAdapter.notifyDataSetChanged();
+                listviewResult.removeOnItemTouchListener(onclickListener);
+                listviewResult.addOnItemTouchListener(onclickListener);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -191,6 +213,7 @@ public class SearchFragment extends Fragment {
                     for (int i=0; i<response.length(); i++){
                         JSONObject data = response.getJSONObject(i);
                         listItemSearchResult.add(new ItemProductCard(
+                                data.getInt("id"),
                                 data.getString("poster_img"),
                                 data.getString("name")
                         ));
@@ -200,6 +223,7 @@ public class SearchFragment extends Fragment {
                 }
                 textSearchMessage.setText("Tìm thấy "+listItemSearchResult.size()+" phim");
                 searchResultAdapter.notifyDataSetChanged();
+                listviewResult.removeOnItemTouchListener(onclickListener);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -229,6 +253,7 @@ public class SearchFragment extends Fragment {
                     for (int i=0; i<response.length(); i++){
                         JSONObject data = response.getJSONObject(i);
                         listItemSearchResult.add(new ItemProductCard(
+                                data.getInt("id"),
                                 data.getString("cover_img"),
                                 data.getString("name")
                         ));
@@ -238,6 +263,7 @@ public class SearchFragment extends Fragment {
                 }
                 textSearchMessage.setText("Tìm thấy "+listItemSearchResult.size()+" truyện");
                 searchResultAdapter.notifyDataSetChanged();
+                listviewResult.removeOnItemTouchListener(onclickListener);
             }
         }, new Response.ErrorListener() {
             @Override

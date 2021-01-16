@@ -68,7 +68,6 @@ public class SimpleLoginActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         pDialog.dismiss();
-                        Toast.makeText(getBaseContext(), response, Toast.LENGTH_SHORT).show();
                         try{
                             JSONObject jsonResult = new JSONObject(response);
                             if (jsonResult.has("id")){
@@ -107,6 +106,11 @@ public class SimpleLoginActivity extends AppCompatActivity {
         Intent intent = new Intent();
         setResult(getResources().getInteger(R.integer.loginResultSkipCode), intent);
         finish();
+    }
+
+    public void gotoRegister(View view){
+        Intent intent = new Intent(getBaseContext(), RegisterActivity.class);
+        startActivity(intent);
     }
 
     private void onLoginSuccess(int userId){

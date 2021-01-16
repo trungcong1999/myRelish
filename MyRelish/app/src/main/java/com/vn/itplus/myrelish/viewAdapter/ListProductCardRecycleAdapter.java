@@ -66,4 +66,6 @@ public class ListProductCardRecycleAdapter extends RecyclerView.Adapter<ListProd
     public int getItemCount() {
         return listItemProductCard.size();
     }
+
+
 }
