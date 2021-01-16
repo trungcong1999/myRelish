@@ -5,7 +5,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Category</title>
+        <title>Novel</title>
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
         <!-- bootstrap 3.0.2 -->
         <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -30,12 +30,12 @@
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
-			Category
+			Tiểu thuyết
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
 			<li><a href="#">Category</a></li>
-			<li class="active">Categorys</li>
+			<li class="active">novel</li>
 		</ol>
 	</section>
 
@@ -45,7 +45,7 @@
 			<div class="col-xs-12">
 				<div class="box">
 					<div class="box-header" style="padding-top: 10px;">
-						<a  href="${pageContext.request.contextPath}/pages/novel/addNovel" class="btn btn-primary"><i class="fa fa-fw fa-plus"></i>Thêm mới</a>
+						<a  href="${pageContext.request.contextPath}/admin/pages/novel/addNovel" class="btn btn-primary"><i class="fa fa-fw fa-plus"></i>Thêm mới</a>
 					</div>
 					<!-- /.box-header -->
 					<div class="box-body table-responsive">
@@ -70,8 +70,8 @@
 										<td>${novel.authorNovel}</td>
 										<td>${novel.description}</td>
 										<td>${novel.release_date}</td>
-										<td><a href="${pageContext.request.contextPath}/pages/novel/editNovel/${novel.id}"><i class="fa fa-fw fa-pencil"></i></a>&ensp;
-										<a href="${pageContext.request.contextPath}/pages/novel/delete/${novel.id}"><i class="fa fa-fw fa-trash-o"></i></a></td>
+										<td><a href="${pageContext.request.contextPath}/admin/pages/novel/editNovel/${novel.id}"><i class="fa fa-fw fa-pencil"></i></a>&ensp;
+										<a href="${pageContext.request.contextPath}/admin/pages/novel/delete/${novel.id}"><i class="fa fa-fw fa-trash-o"></i></a></td>
 									</tr>
 								</c:forEach>
 							</tbody>

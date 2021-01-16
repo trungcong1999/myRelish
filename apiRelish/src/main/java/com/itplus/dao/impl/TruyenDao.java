@@ -2,6 +2,7 @@ package com.itplus.dao.impl;
 
 import java.util.List;
 
+import com.itplus.entity.Creator;
 import com.itplus.entity.Truyen;
 
 public interface TruyenDao {
@@ -12,4 +13,5 @@ public interface TruyenDao {
 	Truyen getTruyenById(int id);
 	List<Truyen> findByName(String name);
 	List<Truyen> getAllWithTG();
+	List<Creator> getAllCreator();
 }

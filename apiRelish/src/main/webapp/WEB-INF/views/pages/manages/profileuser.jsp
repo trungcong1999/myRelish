@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Add User</title>
+<title> User</title>
 <meta
 	content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'
 	name='viewport'>
@@ -54,11 +54,11 @@
 
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
-		<h1>Sửa thành viên</h1>
+		<h1>Profile</h1>
 		<ol class="breadcrumb">
 			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
 			<li><a href="#">Manage</a></li>
-			<li class="active">Edit</li>
+			<li class="active">profile</li>
 		</ol>
 	</section>
 
@@ -72,7 +72,7 @@
 
 					<!-- /.box-header -->
 					<!-- form start -->
-					<form:form action="${pageContext.request.contextPath}/" modelAttribute="profileUser" method="POST">
+					<form:form action="${pageContext.request.contextPath}/admin" modelAttribute="profileUser" method="POST">
 						
 						<div class="box-body">
 						<div class="form-group">
@@ -124,7 +124,7 @@
 
 						<div class="box-footer">
 							<button type="submit" class="btn btn-primary">Sửa</button>  
-							<a href="${pageContext.request.contextPath}/pages/user/list" class="btn btn-primary">Thoát</a>
+							<a href="${pageContext.request.contextPath}/admin/pages/user/list" class="btn btn-primary">Thoát</a>
 						</div>
 					</form:form>
 				</div>

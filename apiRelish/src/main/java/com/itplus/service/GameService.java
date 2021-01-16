@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.itplus.entity.Creator;
 import com.itplus.entity.Game;
 @Service
 public interface GameService {
@@ -18,4 +19,5 @@ public interface GameService {
 	List<Game> getReviewByIdUser(int id);
 	List<Game> getRadomReviewById(int id);
 	List<Game> getAllGameName();
+	List<Creator> getAllCreator();
 }

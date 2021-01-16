@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Edit Phim</title>
+<title>Edit Game</title>
 <meta
 	content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'
 	name='viewport'>
@@ -72,7 +72,7 @@
 
 					<!-- /.box-header -->
 					<!-- form start -->
-					<form:form action="${pageContext.request.contextPath}/pages/game/editGame" modelAttribute="editGame" method="POST">
+					<form:form action="${pageContext.request.contextPath}/admin/pages/game/editGame" modelAttribute="editGame" method="POST">
 						
 						<div class="box-body">
 						<div class="form-group">
@@ -133,7 +133,7 @@
 
 						<div class="box-footer">
 							<button type="submit" class="btn btn-primary">Sửa</button>  
-							<a href="${pageContext.request.contextPath}/pages/film/list" class="btn btn-primary">Thoát</a>
+							<a href="${pageContext.request.contextPath}/admin/pages/film/list" class="btn btn-primary">Thoát</a>
 						</div>
 					</form:form>
 				</div>

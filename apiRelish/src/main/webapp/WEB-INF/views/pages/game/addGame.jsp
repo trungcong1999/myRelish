@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Add Film</title>
+<title>Add Game</title>
 <meta
 	content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'
 	name='viewport'>
@@ -54,11 +54,11 @@
 
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
-		<h1>Thêm phim</h1>
+		<h1>Thêm Game</h1>
 		<ol class="breadcrumb">
 			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
 			<li><a href="#">Category</a></li>
-			<li class="active">AddFilm</li>
+			<li class="active">AddGame</li>
 		</ol>
 	</section>
 
@@ -72,7 +72,7 @@
 
 					<!-- /.box-header -->
 					<!-- form start -->
-					<form action="${pageContext.request.contextPath}/pages/game/addGame" modelAttribute="addGame" enctype="mutipart/form-data" method="POST">
+					<form action="${pageContext.request.contextPath}/admin/pages/game/addGame" modelAttribute="addGame" enctype="mutipart/form-data" method="POST">
 						<div class="box-body">
 							<div class="form-group">
 								<label>Tên Game</label> <input name="name" type="text" class="form-control"/>
@@ -93,7 +93,7 @@
 								<label>Người đăng</label>
 								<select name="publisher_id" class="form-control">
 									<c:forEach items="${listGame}" var="game">
-									<option value="${game.publisher_id}">${game.user_name}</option>
+									<option value="${game.id}">${game.name}</option>
 									</c:forEach>
 								</select>
 							</div>
@@ -101,7 +101,7 @@
 								<label>Người phát triển</label>
 								<select name="developer_id" class="form-control">
 									<c:forEach items="${listGame}" var="game">
-									<option value="${game.developer_id}">${game.user_name}</option>
+									<option value="${game.id}">${game.name}</option>
 									</c:forEach>
 								</select>
 								
@@ -125,7 +125,7 @@
 
 						<div class="box-footer">
 							<button type="submit" class="btn btn-primary">Thêm</button>  
-							<a href="${pageContext.request.contextPath}/pages/game/list" class="btn btn-primary">Thoát</a>
+							<a href="${pageContext.request.contextPath}/admin/pages/game/list" class="btn btn-primary">Thoát</a>
 						</div>
 					</form>
 				</div>

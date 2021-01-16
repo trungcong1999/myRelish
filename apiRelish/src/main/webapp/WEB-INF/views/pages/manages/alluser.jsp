@@ -5,7 +5,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Category</title>
+        <title>User</title>
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
         <!-- bootstrap 3.0.2 -->
         <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -34,8 +34,8 @@
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li><a href="#">Category</a></li>
-			<li class="active">Categorys</li>
+			<li><a href="#">Manage</a></li>
+			<li class="active">AllUser</li>
 		</ol>
 	</section>
 
@@ -77,8 +77,8 @@
 											</c:otherwise>
 										</c:choose>
 										</td>
-										<td><a href="${pageContext.request.contextPath}/pages/user/edit/${user.id}"><i class="fa fa-fw fa-pencil"></i></a>&ensp;
-										<a href="${pageContext.request.contextPath}/pages/user/delete/${user.id}"><i class="fa fa-fw fa-trash-o"></i></a></td>
+										<td><a href="${pageContext.request.contextPath}/admin/pages/user/edit/${user.id}"><i class="fa fa-fw fa-pencil"></i></a>&ensp;
+										<a href="${pageContext.request.contextPath}/admin/pages/user/delete/${user.id}"><i class="fa fa-fw fa-trash-o"></i></a></td>
 									</tr>
 								</c:forEach>
 							

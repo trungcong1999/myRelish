@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Add Film</title>
+<title>Add Novel</title>
 <meta
 	content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'
 	name='viewport'>
@@ -72,7 +72,7 @@
 
 					<!-- /.box-header -->
 					<!-- form start -->
-					<form action="${pageContext.request.contextPath}/pages/novel/addNovel" modelAttribute="addNovel" enctype="mutipart/form-data" method="POST">
+					<form action="${pageContext.request.contextPath}/admin/pages/novel/addNovel" modelAttribute="addNovel" enctype="mutipart/form-data" method="POST">
 						<div class="box-body">
 							<div class="form-group">
 								<label>Tên tiểu thuyết</label> <input name="name" type="text" class="form-control"
@@ -90,8 +90,8 @@
 							<div class="form-group">
 								<label>Người viết</label>
 								<select name="author_id" class="form-control">
-									<c:forEach items="${listCreator}" var="creator">
-									<option value="${creator.id}">${creator.name}</option>
+									<c:forEach items="${listCreator}" var="creators">
+									<option value="${creators.id}">${creators.name}</option>
 									</c:forEach>
 								</select>
 							</div>
@@ -115,7 +115,7 @@
 
 						<div class="box-footer">
 							<button type="submit" class="btn btn-primary">Thêm</button>  
-							<a href="${pageContext.request.contextPath}/pages/novel/list" class="btn btn-primary">Thoát</a>
+							<a href="${pageContext.request.contextPath}/admin/pages/novel/list" class="btn btn-primary">Thoát</a>
 						</div>
 					</form>
 				</div>

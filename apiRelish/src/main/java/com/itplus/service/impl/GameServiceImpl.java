@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.itplus.dao.impl.GameDao;
+import com.itplus.entity.Creator;
 import com.itplus.entity.Game;
 import com.itplus.service.GameService;
 
@@ -78,6 +79,12 @@ public class GameServiceImpl implements GameService{
 	public List<Game> getAllGameName() {
 		// TODO Auto-generated method stub
 		return gameDao.getAllGameName();
+	}
+
+	@Override
+	public List<Creator> getAllCreator() {
+		// TODO Auto-generated method stub
+		return gameDao.getAllCreator();
 	}
 
 

@@ -72,7 +72,7 @@
 
 					<!-- /.box-header -->
 					<!-- form start -->
-					<form action="${pageContext.request.contextPath}/pages/film/addfilm" modelAttribute="addFilm" enctype="mutipart/form-data" method="POST">
+					<form action="${pageContext.request.contextPath}/admin/pages/film/addfilm" modelAttribute="addFilm" enctype="mutipart/form-data" method="POST">
 						<div class="box-body">
 							<div class="form-group">
 								<label>Tên Phim</label> <input name="name" type="text" class="form-control"
@@ -91,7 +91,7 @@
 								<label>Người viết</label>
 								<select name="writer_id" class="form-control">
 									<c:forEach items="${listFilm}" var="film">
-									<option value="${film.writer_id}">${film.name_creator}</option>
+									<option value="${film.id}">${film.name}</option>
 									</c:forEach>
 								</select>
 							</div>
@@ -99,7 +99,7 @@
 								<label>Người sáng tạo</label>
 								<select name="director_id" class="form-control">
 									<c:forEach items="${listFilm}" var="film">
-									<option value="${film.director_id}">${film.name_creator}</option>
+									<option value="${film.id}">${film.name}</option>
 									</c:forEach>
 								</select>
 								
@@ -123,7 +123,7 @@
 
 						<div class="box-footer">
 							<button type="submit" class="btn btn-primary">Thêm</button>  
-							<a href="${pageContext.request.contextPath}/pages/film/list" class="btn btn-primary">Thoát</a>
+							<a href="${pageContext.request.contextPath}/admin/pages/film/list" class="btn btn-primary">Thoát</a>
 						</div>
 					</form>
 				</div>

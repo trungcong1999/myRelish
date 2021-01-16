@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.itplus.entity.Creator;
 import com.itplus.entity.Truyen;
 @Service
 public interface TruyenService {
@@ -14,4 +15,5 @@ public interface TruyenService {
 	Truyen getTruyenById(int id);
 	List<Truyen> findByName(String name);
 	List<Truyen> getAllWithTG();
+	List<Creator> getAllCreator();
 }

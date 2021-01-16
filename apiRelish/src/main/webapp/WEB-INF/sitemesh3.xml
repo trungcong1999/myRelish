@@ -5,7 +5,7 @@
     </content-processor>
      <!-- <mapping exclude="true" decorator="/decorators/dashboardtheme" path="/admin" /> -->
     
-        <mapping  decorator="/decorators/dashboardtheme" path="/*" />
+        <mapping  decorator="/decorators/dashboardtheme" path="/admin*" />
     
     
 	<mapping exclude="true" decorator="/decorators/dashboardtheme" path="/ajax/*" />

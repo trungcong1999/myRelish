@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import com.itplus.entity.Creator;
 import com.itplus.entity.Game;
 
 @Repository
@@ -135,6 +136,26 @@ public class GameDaoImpl implements GameDao {
 
 		});
 		return listGame;
+	}
+
+	@Override
+	public List<Creator> getAllCreator() {
+		// TODO Auto-generated method stub
+		String sql="SELECT * FROM tbl_creator";
+		List<Creator> listCretor=jdbcTemplate.query(sql,new Object[] {},new  RowMapper<Creator>() {
+
+			@Override
+			public Creator mapRow(ResultSet rs, int rowNum) throws SQLException {
+				// TODO Auto-generated method stub
+				Creator creator = new Creator();
+				creator.setId(rs.getInt("id"));
+				creator.setName(rs.getString("name"));
+				creator.setBio(rs.getString("bio"));
+				return creator;
+			}
+			
+		});
+		return listCretor;
 	}
 
 

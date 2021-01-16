@@ -21,7 +21,7 @@ public class UserController {
 	@Autowired
 	UserService userService;
 	//hiển thị danh sách userAdmin
-	@RequestMapping(value = "/pages/user/list", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/pages/user/list", method = RequestMethod.GET)
 	public String getUserListPage(HttpServletRequest request) {
 		List<User> list = userService.getAllUser();
 		request.setAttribute("listUser", list);
@@ -30,7 +30,7 @@ public class UserController {
 	}
 	
 	//đăng ký useradmin
-	@RequestMapping(value = "/pages/user/adduser", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/pages/user/adduser", method = RequestMethod.GET)
 	  public String showRegister(Model model) {
 		User user = new User();
 		model.addAttribute("userAdmin", user);
@@ -38,7 +38,7 @@ public class UserController {
 	   
 	  }
 	 
-	  @RequestMapping(value = "/pages/user/add", method = RequestMethod.POST)
+	  @RequestMapping(value = "/admin/pages/user/add", method = RequestMethod.POST)
 	  public String addUser(@ModelAttribute("userAdmin") User user,@RequestParam("name") String name,
 			  @RequestParam("email") String email,@RequestParam("password") String password,
 			  @RequestParam("birthday") String birthday,@RequestParam("gender") String gender,
@@ -48,20 +48,20 @@ public class UserController {
 	  }
 	  
 	  //Sửa thông tin
-	  @RequestMapping(value = "/pages/user/edit/{id}", method = RequestMethod.GET)
+	  @RequestMapping(value = "/admin/pages/user/edit/{id}", method = RequestMethod.GET)
 	  public String editUser(@PathVariable int id, Model model) {
 		  User user = userService.findUserById(id);
 		  model.addAttribute("editUser", user);
 		  return "/pages/manages/editUser";
 	  }
 	  
-	  @RequestMapping(value = "/pages/user/editSave", method = RequestMethod.POST)
+	  @RequestMapping(value = "/admin/pages/user/editSave", method = RequestMethod.POST)
 	  public String editUserSave(@ModelAttribute("editUser") User user) {
 		  userService.updateUser(user);
 		  return "redirect:list";
 	  }
 	  //Xóa user
-	  @RequestMapping(value = "/pages/user/delete/{id}", method = RequestMethod.GET)
+	  @RequestMapping(value = "/admin/pages/user/delete/{id}", method = RequestMethod.GET)
 	  public String deleteUser(@PathVariable int id) {
 		userService.deleteUser(id);
 		return "redirect:/pages/user/list";
@@ -69,7 +69,7 @@ public class UserController {
 	  }
 	  
 	 //profile user {chưa đăng nhập được nên không thể vào profileuser}
-	  @RequestMapping(value = "/pages/user/profileUser/{id}",method = RequestMethod.GET)
+	  @RequestMapping(value = "/admin/pages/user/profileUser/{id}",method = RequestMethod.GET)
 	  public String profileUser(@PathVariable int id,Model model) {
 		  User user = userService.findUserById(id);
 		  model.addAttribute("profileUser", user);

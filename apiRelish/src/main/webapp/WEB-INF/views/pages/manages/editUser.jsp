@@ -72,7 +72,7 @@
 
 					<!-- /.box-header -->
 					<!-- form start -->
-					<form:form action="${pageContext.request.contextPath}/pages/user/editSave" modelAttribute="editUser" method="POST">
+					<form:form action="${pageContext.request.contextPath}/admin/pages/user/editSave" modelAttribute="editUser" method="POST">
 						
 						<div class="box-body">
 						<div class="form-group">
@@ -124,7 +124,7 @@
 
 						<div class="box-footer">
 							<button type="submit" class="btn btn-primary">Sửa</button>  
-							<a href="${pageContext.request.contextPath}/pages/user/list" class="btn btn-primary">Thoát</a>
+							<a href="${pageContext.request.contextPath}/admin/pages/user/list" class="btn btn-primary">Thoát</a>
 						</div>
 					</form:form>
 				</div>

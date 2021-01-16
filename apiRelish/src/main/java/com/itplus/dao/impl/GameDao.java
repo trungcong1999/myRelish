@@ -2,6 +2,7 @@ package com.itplus.dao.impl;
 
 import java.util.List;
 
+import com.itplus.entity.Creator;
 import com.itplus.entity.Game;
 
 public interface GameDao {
@@ -16,4 +17,5 @@ public interface GameDao {
 	List<Game> getReviewByIdUser(int id);
 	List<Game> getRadomReviewById(int id);
 	List<Game> getAllGameName();
+	List<Creator> getAllCreator();
 }

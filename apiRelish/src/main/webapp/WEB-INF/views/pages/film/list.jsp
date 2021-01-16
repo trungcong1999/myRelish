@@ -30,12 +30,12 @@
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
-			Category
+			Phim
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
 			<li><a href="#">Category</a></li>
-			<li class="active">Categorys</li>
+			<li class="active">Phim</li>
 		</ol>
 	</section>
 
@@ -45,7 +45,7 @@
 			<div class="col-xs-12">
 				<div class="box">
 					<div class="box-header" style="padding-top: 10px;">
-						<a  href="${pageContext.request.contextPath}/pages/film/addfilm" class="btn btn-primary"><i class="fa fa-fw fa-plus"></i>Thêm mới</a>
+						<a  href="${pageContext.request.contextPath}/admin/pages/film/addfilm" class="btn btn-primary"><i class="fa fa-fw fa-plus"></i>Thêm mới</a>
 					</div>
 					<!-- /.box-header -->
 					<div class="box-body table-responsive">
@@ -72,8 +72,8 @@
 										<td>${film.name_creator}</td>
 										<td>${film.name_creator}</td>
 										<td>${film.release_date}</td>
-										<td><a href="${pageContext.request.contextPath}/pages/film/editFilm/${film.id}"><i class="fa fa-fw fa-pencil"></i></a>&ensp;
-										<a href="${pageContext.request.contextPath}/pages/film/delete/${film.id}"><i class="fa fa-fw fa-trash-o"></i></a></td>
+										<td><a href="${pageContext.request.contextPath}/admin/pages/film/editFilm/${film.id}"><i class="fa fa-fw fa-pencil"></i></a>&ensp;
+										<a href="${pageContext.request.contextPath}/admin/pages/film/delete/${film.id}"><i class="fa fa-fw fa-trash-o"></i></a></td>
 									</tr>
 								</c:forEach>
 							</tbody>

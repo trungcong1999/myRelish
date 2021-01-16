@@ -18,7 +18,7 @@ public class LoginController {
 	@Autowired
 	UserService userService;
 	
-	@RequestMapping(value = "/admin", method = RequestMethod.GET)
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView showLogin(HttpServletRequest request) {
 		ModelAndView view = new ModelAndView("login");
 		User user = new User();
@@ -26,7 +26,7 @@ public class LoginController {
 		return view;
 	}
 	
-	@RequestMapping(value = "/admin/index", method = RequestMethod.POST)
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ModelAndView processLogin(@ModelAttribute("loginBean") User user, HttpServletRequest request,@RequestParam("email") String email,@RequestParam("password") String password) {
 		ModelAndView view =null;
 		if(userService.checklogin(user.getEmail(), user.getPassword())) {

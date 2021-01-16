@@ -5,7 +5,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Category</title>
+        <title>Game</title>
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
         <!-- bootstrap 3.0.2 -->
         <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -30,7 +30,7 @@
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
-			Category
+			Game
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -45,7 +45,7 @@
 			<div class="col-xs-12">
 				<div class="box">
 					<div class="box-header" style="padding-top: 10px;">
-						<a  href="${pageContext.request.contextPath}/pages/game/addGame" class="btn btn-primary"><i class="fa fa-fw fa-plus"></i>Thêm mới</a>
+						<a  href="${pageContext.request.contextPath}/admin/pages/game/addGame" class="btn btn-primary"><i class="fa fa-fw fa-plus"></i>Thêm mới</a>
 					</div>
 					<!-- /.box-header -->
 					<div class="box-body table-responsive">
@@ -74,8 +74,8 @@
 										<td>${game.release_date}</td>
 										<td>${game.user_name}</td>
 										<td>${game.user_name}</td>
-										<td><a href="${pageContext.request.contextPath}/pages/game/editGame/${game.id}"><i class="fa fa-fw fa-pencil"></i></a>&ensp;
-										<a href="${pageContext.request.contextPath}/pages/game/delete/${game.id}"><i class="fa fa-fw fa-trash-o"></i></a></td>
+										<td><a href="${pageContext.request.contextPath}/admin/pages/game/editGame/${game.id}"><i class="fa fa-fw fa-pencil"></i></a>&ensp;
+										<a href="${pageContext.request.contextPath}/admin/pages/game/delete/${game.id}"><i class="fa fa-fw fa-trash-o"></i></a></td>
 									</tr>
 								</c:forEach>
 							</tbody>

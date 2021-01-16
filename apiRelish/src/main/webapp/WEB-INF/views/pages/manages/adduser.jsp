@@ -55,7 +55,7 @@
 		<h1>Thêm thành viên</h1>
 		<ol class="breadcrumb">
 			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li><a href="#">Category</a></li>
+			<li><a href="#">Manage</a></li>
 			<li class="active">Add</li>
 		</ol>
 	</section>
@@ -70,7 +70,7 @@
 
 					<!-- /.box-header -->
 					<!-- form start -->
-					<form action="${pageContext.request.contextPath}/pages/user/add" modelAttribute="userAdmin" enctype="mutipart/form-data" method="POST">
+					<form action="${pageContext.request.contextPath}/admin/pages/user/add" modelAttribute="userAdmin" enctype="mutipart/form-data" method="POST">
 						<div class="box-body">
 							<div class="form-group">
 								<label>Họ và tên</label> <input name="name" type="text" class="form-control"
@@ -121,7 +121,7 @@
 
 						<div class="box-footer">
 							<button type="submit" class="btn btn-primary">Thêm</button>  
-							<a href="${pageContext.request.contextPath}/pages/user/list" class="btn btn-primary">Thoát</a>
+							<a href="${pageContext.request.contextPath}/admin/pages/user/list" class="btn btn-primary">Thoát</a>
 						</div>
 					</form>
 				</div>

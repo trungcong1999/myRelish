@@ -2,6 +2,7 @@ package com.itplus.dao.impl;
 
 import java.util.List;
 
+import com.itplus.entity.Creator;
 import com.itplus.entity.Film;
 
 public interface FilmDao {
@@ -12,4 +13,5 @@ public interface FilmDao {
 	Film getFilmById(int id);
 	List<Film> findByName(String name);
 	List<Film> getAllCreator();
+	List<Creator> getAllCreators();
 }
