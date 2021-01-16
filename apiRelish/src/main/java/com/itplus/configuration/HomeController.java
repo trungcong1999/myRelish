@@ -21,7 +21,7 @@ public class HomeController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
@@ -51,6 +51,8 @@ public class HomeController {
 		
 		return "pages/"+type+"/"+page;
 	}
+	
+	
 	
 	@RequestMapping(value = "/pages/{page}", method = RequestMethod.GET)
 	public String pages(Locale locale, Model model,@PathVariable(value="page") String page) {

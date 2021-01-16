@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Category</title>
+        <title>Phim</title>
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
         <!-- bootstrap 3.0.2 -->
         <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -29,12 +30,12 @@
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
-			Bài viết
+			Phim
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
 			<li><a href="#">Category</a></li>
-			<li class="active">Posts</li>
+			<li class="active">Phim</li>
 		</ol>
 	</section>
 
@@ -44,7 +45,7 @@
 			<div class="col-xs-12">
 				<div class="box">
 					<div class="box-header" style="padding-top: 10px;">
-						<a  href="${pageContext.request.contextPath}/pages/category/editors" class="btn btn-primary"><i class="fa fa-fw fa-plus"></i>Thêm bài viết</a>
+						<a  href="${pageContext.request.contextPath}/admin/pages/film/addfilm" class="btn btn-primary"><i class="fa fa-fw fa-plus"></i>Thêm mới</a>
 					</div>
 					<!-- /.box-header -->
 					<div class="box-body table-responsive">
@@ -52,24 +53,31 @@
 							<thead>
 								<tr>
 									<th style="text-align:center;">STT</th>
-									<th style="text-align:center;">Tiêu đề</th>
-									<th style="text-align:center;">Tác giả</th>
-									<th style="text-align:center;">Danh mục</th>
-									<th style="text-align:center;">Thời gian</th>
+									<th style="text-align:center;">Ảnh đại diện</th>
+									<th style="text-align:center;width: 120px;">Tên</th>
+									<th style="text-align:center;width: 160px;">Chi tiết</th>
+									<th style="text-align:center;width: 130px;">Người viết</th>
+									<th style="text-align:center;width: 130px;">Người sáng tác</th>
+									<th style="text-align:center;width: 130px;">Ngày phát hành</th>
 									<th style="text-align:center;">Tác vụ</th>
 								</tr>
 							</thead>
 							<tbody style="text-align:center;">
-								<tr>
-									<td>1</td>
-									<td><a href="#">Start War</a></td>
-									<td>Minacart</td>
-									<td>Giới thiệu</td>
-									<td>2020-1-10 20:15:33</td>
-									<td><a href="#"><i class="fa fa-fw fa-pencil"></i></a>&ensp;
-									<a href="#"><i class="fa fa-fw fa-trash-o"></i></a></td>
-								</tr>	
+								<c:forEach items="${listFilm}" var="film">
+									<tr>
+										<td>${film.id}</td>
+										<td><img src="<c:url value="${film.poster_img}"/>" width="100"/></td>
+										<td>${film.name}</td>
+										<td>${film.description}</td>
+										<td>${film.name_creator}</td>
+										<td>${film.name_creator}</td>
+										<td>${film.release_date}</td>
+										<td><a href="${pageContext.request.contextPath}/admin/pages/film/editFilm/${film.id}"><i class="fa fa-fw fa-pencil"></i></a>&ensp;
+										<a href="${pageContext.request.contextPath}/admin/pages/film/delete/${film.id}"><i class="fa fa-fw fa-trash-o"></i></a></td>
+									</tr>
+								</c:forEach>
 							</tbody>
+							
 						</table>
 					</div>
 					<!-- /.box-body -->
@@ -77,6 +85,7 @@
 				<!-- /.box -->
 			</div>
 		</div>
+
 	</section>
 	<!-- /.content -->
 

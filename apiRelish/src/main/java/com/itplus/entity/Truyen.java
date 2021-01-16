@@ -7,11 +7,13 @@ public class Truyen {
 	private String description;
 	private String cover_img;
 	private String 	release_date;
+	private String authorNovel;
 	public Truyen() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Truyen(int id, String name, int author_id, String description, String cover_img, String release_date) {
+	public Truyen(int id, String name, int author_id, String description, String cover_img, String release_date,
+			String authorNovel) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -19,6 +21,7 @@ public class Truyen {
 		this.description = description;
 		this.cover_img = cover_img;
 		this.release_date = release_date;
+		this.authorNovel = authorNovel;
 	}
 	public int getId() {
 		return id;
@@ -56,6 +59,13 @@ public class Truyen {
 	public void setRelease_date(String release_date) {
 		this.release_date = release_date;
 	}
+	public String getAuthorNovel() {
+		return authorNovel;
+	}
+	public void setAuthorNovel(String authorNovel) {
+		this.authorNovel = authorNovel;
+	}
+	
 	
 	
 	

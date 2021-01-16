@@ -13,7 +13,7 @@
     <body class="skin-blue">
         <!-- header logo: style can be found in header.less -->
         <header class="header">
-            <a href="${pageContext.request.contextPath}/" class="logo">
+            <a href="${pageContext.request.contextPath}/admin" class="logo">
                 <!-- Add the class icon to your logo image or logo icon to add the margining -->
                 Relish
             </a>
@@ -290,31 +290,35 @@
                             <a href="${pageContext.request.contextPath}/">
                                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                             </a>
-                        </li>
-                        
+                        </li>         
                         <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-bar-chart-o"></i>
-                                <span>Quản trị Danh mục</span>
+                                <span>Quản lý Game</span>
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="${pageContext.request.contextPath}/pages/category/categorys"><i class="fa fa-angle-double-right"></i> Loại danh mục</a></li>
-                                <li><a href="${pageContext.request.contextPath}/pages/category/posts"><i class="fa fa-angle-double-right"></i> Bài viết</a></li>
-                                
-                                
+                                <li><a href="${pageContext.request.contextPath}/admin/pages/game/list"><i class="fa fa-angle-double-right"></i> Danh sách game</a></li>
                             </ul>
                         </li>
                         <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-laptop"></i>
-                                <span>Quản lý Giao diện</span>
+                                <span>Quản lý Phim</span>
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="${pageContext.request.contextPath}/pages/UI/general"><i class="fa fa-angle-double-right"></i> Hình ảnh</a></li>
-                                <li><a href="${pageContext.request.contextPath}/pages/UI/icons"><i class="fa fa-angle-double-right"></i> Thông tin</a></li>
-                                <li><a href="${pageContext.request.contextPath}/pages/UI/buttons"><i class="fa fa-angle-double-right"></i> Nội dung khác</a></li>   
+                                <li><a href="${pageContext.request.contextPath}/admin/pages/film/list"><i class="fa fa-angle-double-right"></i> Danh sách Phim</a></li>   
+                            </ul>
+                        </li>
+                          <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-bar-chart-o"></i>
+                                <span>Quản lý Tiểu thuyết</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="${pageContext.request.contextPath}/admin/pages/novel/list"><i class="fa fa-angle-double-right"></i> Danh sách Tiểu thuyết</a></li>
                             </ul>
                         </li>
                         <li class="treeview">
@@ -323,10 +327,10 @@
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="${pageContext.request.contextPath}/pages/manages/alluser"><i class="fa fa-angle-double-right"></i> Tất cả người dùng</a></li>
-                                <li><a href="${pageContext.request.contextPath}/pages/manages/adduser"><i class="fa fa-angle-double-right"></i> Thêm mới</a></li>
-                                <li><a href="${pageContext.request.contextPath}/pages/manages/profileuser"><i class="fa fa-angle-double-right"></i> Hồ sơ của bạn</a></li>
-                            	<li><a href="${pageContext.request.contextPath}/pages/examples/login"><i class="fa fa-angle-double-right"></i> Thoát</a></li>
+                                <li><a href="${pageContext.request.contextPath}/admin/pages/user/list"><i class="fa fa-angle-double-right"></i> Tất cả người dùng</a></li>
+                                <li><a href="${pageContext.request.contextPath}/admin/pages/user/adduser"><i class="fa fa-angle-double-right"></i> Thêm mới</a></li>
+                                <li><a href="${pageContext.request.contextPath}/admin/pages/user/profileUser/1"><i class="fa fa-angle-double-right"></i> Hồ sơ của bạn</a></li>
+                            	<li><a href="${pageContext.request.contextPath}/admin/pages/examples/login"><i class="fa fa-angle-double-right"></i> Thoát</a></li>
                             </ul>
                         </li>
                         <%-- <li class="treeview">

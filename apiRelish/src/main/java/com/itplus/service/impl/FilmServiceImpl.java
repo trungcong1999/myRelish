@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.itplus.dao.impl.FilmDao;
+import com.itplus.entity.Creator;
 import com.itplus.entity.Film;
 import com.itplus.service.FilmService;
 
@@ -53,6 +54,16 @@ public class FilmServiceImpl implements FilmService {
 	@Override
 	public List<Film> getLatestProducts(int limit) {
 		return filmDao.getLatestProducts(limit);
+	}
+	public List<Film> getAllCreator() {
+		// TODO Auto-generated method stub
+		return filmDao.getAllCreator();
+	}
+
+	@Override
+	public List<Creator> getAllCreators() {
+		// TODO Auto-generated method stub
+		return filmDao.getAllCreators();
 	}
 
 

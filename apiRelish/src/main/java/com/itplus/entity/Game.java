@@ -17,13 +17,14 @@ public class Game {
 	
 	private int publisher_id;
 	private int developer_id;
+	private String user_name;
 	@NotNull
 	public Game() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public Game(int id, String name, String release_date, int metacritic_score, String description, String header_img,
-			int publisher_id, int developer_id) {
+			int publisher_id, int developer_id, String user_name) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -33,6 +34,7 @@ public class Game {
 		this.header_img = header_img;
 		this.publisher_id = publisher_id;
 		this.developer_id = developer_id;
+		this.user_name = user_name;
 	}
 	public int getId() {
 		return id;
@@ -82,4 +84,14 @@ public class Game {
 	public void setDeveloper_id(int developer_id) {
 		this.developer_id = developer_id;
 	}
+	public String getUser_name() {
+		return user_name;
+	}
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
+	}
+	
+	
+
+	
 }

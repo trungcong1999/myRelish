@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Category</title>
+        <title>User</title>
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
         <!-- bootstrap 3.0.2 -->
         <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -33,8 +34,8 @@
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li><a href="#">Category</a></li>
-			<li class="active">Categorys</li>
+			<li><a href="#">Manage</a></li>
+			<li class="active">AllUser</li>
 		</ol>
 	</section>
 
@@ -50,38 +51,37 @@
 							<thead>
 								<tr>
 									<th style="text-align:center;">STT</th>
+									<th style="text-align:center;">Avatar</th>
 									<th style="text-align:center;">Họ tên</th>
 									<th style="text-align:center;">Email</th>
 									<th style="text-align:center;">Ngày sinh</th>
 									<th style="text-align:center;">Giới tính</th>
-									<th style="text-align:center;">Chức danh</th>
-									<th style="text-align:center;">Bio</th>
 									<th style="text-align:center;">Tác vụ</th>
 								</tr>
 							</thead>
 							<tbody style="text-align:center;">
-								<tr>
-									<td>1</td>
-									<td><a href="#">Hoàng Trung Công</a></td>
-									<td>trungcong1999@gmail.com</td>
-									<td>2020-12-01</td>
-									<td>Nam</td>
-									<td>Quản lý</td>
-									<td>...</td>
-									<td><a href="#"><i class="fa fa-fw fa-pencil"></i></a>&ensp;
-									<a href="#"><i class="fa fa-fw fa-trash-o"></i></a></td>
-								</tr>
-								<tr>
-									<td>2</td>
-									<td><a href="#">Hoàng Trung Công</a></td>
-									<td>trungcong1999@gmail.com</td>
-									<td>2020-12-01</td>
-									<td>Nam</td>
-									<td>Quản lý</td>
-									<td>...</td>
-									<td><a href="#"><i class="fa fa-fw fa-pencil"></i></a>&ensp;
-									<a href="#"><i class="fa fa-fw fa-trash-o"></i></a></td>
-								</tr>
+								<c:forEach items="${listUser}" var="user">
+									<tr>
+										<td>${user.id}</td>
+										<td><img src="<c:url value="${user.avatar_img}"/>" width="80"/></td>
+										<td>${user.name}</td>
+										<td>${user.email}</td>
+										<td>${user.birthday}</td>
+										<td>
+										<c:choose>
+											<c:when test="${user.gender==0}">
+												Nữ
+											</c:when>
+											<c:otherwise>
+												Nam
+											</c:otherwise>
+										</c:choose>
+										</td>
+										<td><a href="${pageContext.request.contextPath}/admin/pages/user/edit/${user.id}"><i class="fa fa-fw fa-pencil"></i></a>&ensp;
+										<a href="${pageContext.request.contextPath}/admin/pages/user/delete/${user.id}"><i class="fa fa-fw fa-trash-o"></i></a></td>
+									</tr>
+								</c:forEach>
+							
 							</tbody>
 							
 						</table>

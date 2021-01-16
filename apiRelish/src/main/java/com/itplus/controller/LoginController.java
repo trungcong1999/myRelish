@@ -7,13 +7,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.itplus.entity.User;
 import com.itplus.service.UserService;
 
 @Controller
-public class usercontroller {
+public class LoginController {
 	@Autowired
 	UserService userService;
 	
@@ -26,11 +27,11 @@ public class usercontroller {
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ModelAndView processLogin(@ModelAttribute("loginBean") User user, HttpServletRequest request) {
+	public ModelAndView processLogin(@ModelAttribute("loginBean") User user, HttpServletRequest request,@RequestParam("email") String email,@RequestParam("password") String password) {
 		ModelAndView view =null;
 		if(userService.checklogin(user.getEmail(), user.getPassword())) {
 			request.setAttribute("loggedInUser", user.getEmail());
-			view = new ModelAndView("welcome");
+			view = new ModelAndView("index");
 		}else {
 			request.setAttribute("message", "Invalid ussename or password!");
             view = new ModelAndView("login");

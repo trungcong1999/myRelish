@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.itplus.entity.CountObject;
 import com.itplus.entity.FloatValueObject;
+import com.itplus.entity.Creator;
 import com.itplus.entity.Game;
 import com.itplus.entity.GameCriteriaReview;
 import com.itplus.entity.GameReviewArticle;
@@ -26,4 +27,6 @@ public interface GameDao {
 	CountObject countInPeopleCollectionByGameId(int gameId);
 	FloatValueObject getAverageScoreByGameId(int gameId);
 	CountObject checkIsGameInCollection(int gameId, int userId);
+	List<Game> getAllGameName();
+	List<Creator> getAllCreator();
 }

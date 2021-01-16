@@ -20,6 +20,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.vn.itplus.myrelish.CollectionActivity;
@@ -142,16 +143,12 @@ public class ProfileFragment extends Fragment {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         int userId = preferences.getInt("userId", -1);
         final String url = getResources().getString(R.string.server_url)+"/user/"+userId;
-        JsonArrayRequest jsonObjectRequest = new JsonArrayRequest(
-                Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
-            public void onResponse(JSONArray response) {
+            public void onResponse(JSONObject response) {
                 try {
-                    if (response.length() <= 0){
-                        Toast.makeText(getActivity(), "User's not exist", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                    JSONObject profileData = response.getJSONObject(0);
+                    JSONObject profileData = response;
 //                    Toast.makeText(getActivity(), profileData.toString(), Toast.LENGTH_SHORT).show();
                     txt_username.setText(profileData.getString("name"));
                     txt_userBirthDay.setText(profileData.getString("birthday"));

@@ -314,6 +314,19 @@ img {
 .table-striped > tbody > tr:nth-child(odd) > td,
 .table-striped > tbody > tr:nth-child(odd) > th {
   background-color: #f3f4f5;
+  text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 0%;
+    max-width: 0px;
+    overflow: hidden;
+}
+.table-striped > tbody > tr:nth-child(even) > td,
+.table-striped > tbody > tr:nth-child(even) > th {
+  text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 0%;
+    max-width: 0px;
+    overflow: hidden;
 }
 /* .text-center in tables */
 table.text-center td,

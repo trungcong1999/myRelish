@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Add Category</title>
+<title>Add User</title>
 <meta
 	content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'
 	name='viewport'>
@@ -55,7 +55,7 @@
 		<h1>Thêm thành viên</h1>
 		<ol class="breadcrumb">
 			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li><a href="#">Category</a></li>
+			<li><a href="#">Manage</a></li>
 			<li class="active">Add</li>
 		</ol>
 	</section>
@@ -70,15 +70,19 @@
 
 					<!-- /.box-header -->
 					<!-- form start -->
-					<form role="form">
+					<form action="${pageContext.request.contextPath}/admin/pages/user/add" modelAttribute="userAdmin" enctype="mutipart/form-data" method="POST">
 						<div class="box-body">
 							<div class="form-group">
-								<label>Họ và tên</label> <input type="text" class="form-control"
+								<label>Họ và tên</label> <input name="name" type="text" class="form-control"
 									placeholder="VD: Nguyễn Văn A" />
 							</div>
 							<div class="form-group">
-								<label>Email</label> <input type="email" class="form-control"
+								<label>Email</label> <input name="email" type="email" class="form-control"
 									placeholder="VD: nguyenvana@gmail.com" />
+							</div>
+							<div class="form-group">
+								<label>Password</label> <input name="password" type="password" class="form-control"
+									 />
 							</div>
 							<div class="form-group">
 								<label>Ngày sinh</label>
@@ -86,7 +90,7 @@
 									<div class="input-group-addon">
 										<i class="fa fa-calendar"></i>
 									</div>
-									<input type="text" class="form-control"
+									<input name="birthday" type="date" class="form-control"
 										data-inputmask="'alias': 'dd/mm/yyyy'" data-mask />
 								</div>
 								<!-- /.input group -->
@@ -95,20 +99,18 @@
 							<div class="form-group">
 								<label for="Category">Giới tính</label>
 								<div class="form-group">
-									<select class="form-control">
-										<option>Nam</option>
-										<option>Nữ</option>
-										<option>Khác</option>
+									<select name="gender" class="form-control">
+										<option value="1">Nam</option>
+										<option value="0">Nữ</option>
 									</select>
 								</div>
 							</div>
-							<!-- textarea -->
 							<div class="form-group">
 								<label>Thông tin thêm</label>
-								<textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
+								<textarea name="bio" class="form-control" rows="3" placeholder="Enter ..."></textarea>
 							</div>
 							<div class="form-group">
-								<label for="exampleInputFile">Ảnh đại diện</label> <input
+								<label for="exampleInputFile">Ảnh đại diện</label> <input name="image"
 									type="file" id="exampleInputFile">
 								<p class="help-block">Chọn ảnh đại diện.</p>
 							</div>
@@ -118,9 +120,8 @@
 						<!-- /.box-body -->
 
 						<div class="box-footer">
-							<a href="#" class="btn btn-primary">Lưu</a> <a
-								href="${pageContext.request.contextPath}/pages/manages/alluser"
-								class="btn btn-primary">Thoát</a>
+							<button type="submit" class="btn btn-primary">Thêm</button>  
+							<a href="${pageContext.request.contextPath}/admin/pages/user/list" class="btn btn-primary">Thoát</a>
 						</div>
 					</form>
 				</div>

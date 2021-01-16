@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import com.itplus.entity.CountObject;
 import com.itplus.entity.FloatValueObject;
+import com.itplus.entity.Creator;
 import com.itplus.entity.Game;
 import com.itplus.entity.GameCriteriaReview;
 import com.itplus.entity.GameReviewArticle;
@@ -64,7 +65,13 @@ public class GameDaoImpl implements GameDao {
 	@Override
 	public void deleteGame(int id) {
 		// TODO Auto-generated method stub
-		String sql = "delete from tbl_game_info where id = ?";
+		String sql = "delete from tbl_game_tag where game_id = ?";
+		jdbcTemplate.update(sql, id);
+		sql = "delete from tbl_game_review where id_game = ?";
+		jdbcTemplate.update(sql, id);
+		sql = "delete from tbl_game_rate_criteria where game_id = ?";
+		jdbcTemplate.update(sql, id);
+		sql = "delete from tbl_game_info where id = ?";
 		jdbcTemplate.update(sql, id);
 	}
 
@@ -117,6 +124,51 @@ public class GameDaoImpl implements GameDao {
 				+ "WHERE tbl_game_rate_criteria.game_id=? AND tbl_game_rate_criteria.user_id=?";
 		return jdbcTemplate.query(sql,new Object[] {gameId, userId}, new BeanPropertyRowMapper<GameCriteriaReview>(GameCriteriaReview.class));
 	}
+	public List<Game> getAllGameName() {
+		// TODO Auto-generated method stub
+		String sql="SELECT tbl_game_info.*,tbl_creator.name as username FROM tbl_game_info,tbl_creator WHERE tbl_game_info.publisher_id=tbl_creator.id AND tbl_game_info.developer_id=tbl_creator.id";
+		List<Game> listGame = jdbcTemplate.query(sql, new Object[] {}, new RowMapper<Game>() {
+
+			@Override
+			public Game mapRow(ResultSet rs, int rowNum) throws SQLException {
+				// TODO Auto-generated method stub
+				Game game = new Game();
+				game.setId(rs.getInt("id"));
+				game.setName(rs.getString("name"));
+				game.setRelease_date(rs.getString("release_date"));
+				game.setMetacritic_score(rs.getInt("metacritic_score"));
+				game.setDescription(rs.getString("description"));
+				game.setHeader_img(rs.getString("header_img"));
+				game.setPublisher_id(rs.getInt("publisher_id"));
+				game.setDeveloper_id(rs.getInt("developer_id"));
+				game.setUser_name(rs.getString("username"));
+				return game;
+			}
+
+		});
+		return listGame;
+	}
+
+	@Override
+	public List<Creator> getAllCreator() {
+		// TODO Auto-generated method stub
+		String sql="SELECT * FROM tbl_creator";
+		List<Creator> listCretor=jdbcTemplate.query(sql,new Object[] {},new  RowMapper<Creator>() {
+
+			@Override
+			public Creator mapRow(ResultSet rs, int rowNum) throws SQLException {
+				// TODO Auto-generated method stub
+				Creator creator = new Creator();
+				creator.setId(rs.getInt("id"));
+				creator.setName(rs.getString("name"));
+				creator.setBio(rs.getString("bio"));
+				return creator;
+			}
+			
+		});
+		return listCretor;
+	}
+
 
 	@Override
 	public List<GameReviewArticle> getAllReviewArticles(int userId, int gameId) {

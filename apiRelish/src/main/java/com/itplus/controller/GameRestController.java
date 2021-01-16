@@ -32,6 +32,7 @@ public class GameRestController {
 		Gson gson = new Gson();
 		return gson.toJson(list);
 	}
+	
 
 	//Thêm Game
 	@RequestMapping(value = "ws-add-new-game", method = RequestMethod.POST)

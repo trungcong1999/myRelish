@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.itplus.entity.Creator;
 import com.itplus.entity.Film;
 import com.itplus.entity.Truyen;
 
@@ -16,4 +17,6 @@ public interface FilmService {
 	Film getFilmById(int id);
 	List<Film> findByName(String name);
 	List<Film> getLatestProducts(int limit);
+	List<Film> getAllCreator();
+	List<Creator> getAllCreators();
 }

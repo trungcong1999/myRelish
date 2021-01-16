@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.itplus.entity.Game;
+import com.itplus.entity.Creator;
 import com.itplus.entity.Truyen;
 
 @Repository
@@ -81,6 +82,48 @@ public class TruyenDaoImpl implements TruyenDao {
 	public List<Truyen> getLatestProducts(int limit) {
 		String sql = "SELECT * FROM tbl_novel_info ORDER BY release_date DESC LIMIT ?";
 		return jdbcTemplate.query(sql,new Object[] {limit}, new BeanPropertyRowMapper<Truyen>(Truyen.class));
+	}
+	public List<Truyen> getAllWithTG() {
+		// TODO Auto-generated method stub
+		String sql="SELECT tbl_novel_info.*,tbl_creator.name as authorNovel FROM tbl_novel_info,tbl_creator WHERE tbl_novel_info.author_id=tbl_creator.id";
+		List<Truyen> listTruyen = jdbcTemplate.query(sql, new Object[] {}, new RowMapper<Truyen>() {
+
+			@Override
+			public Truyen mapRow(ResultSet rs, int rowNum) throws SQLException {
+				// TODO Auto-generated method stub
+				Truyen truyen = new Truyen();
+				truyen.setId(rs.getInt("id"));
+				truyen.setName(rs.getString("name"));
+				truyen.setAuthor_id(rs.getInt("author_id"));
+				truyen.setDescription(rs.getString("description"));
+				truyen.setCover_img(rs.getString("cover_img"));
+				truyen.setRelease_date(rs.getString("release_date"));
+				truyen.setAuthorNovel(rs.getString("authorNovel"));
+				return truyen;
+			}
+
+		});
+		return listTruyen;
+	}
+
+	@Override
+	public List<Creator> getAllCreator() {
+		// TODO Auto-generated method stub
+		String sql="SELECT * FROM tbl_creator";
+		List<Creator> listCretor=jdbcTemplate.query(sql,new Object[] {},new  RowMapper<Creator>() {
+
+			@Override
+			public Creator mapRow(ResultSet rs, int rowNum) throws SQLException {
+				// TODO Auto-generated method stub
+				Creator creator = new Creator();
+				creator.setId(rs.getInt("id"));
+				creator.setName(rs.getString("name"));
+				creator.setBio(rs.getString("bio"));
+				return creator;
+			}
+			
+		});
+		return listCretor;
 	}
 
 	

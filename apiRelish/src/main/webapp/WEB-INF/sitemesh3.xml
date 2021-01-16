@@ -3,7 +3,11 @@
 <content-processor>
         <tag-rule-bundle class="org.sitemesh.content.tagrules.html.Sm2TagRuleBundle" />
     </content-processor>
-	<mapping decorator="/decorators/dashboardtheme" path="/admin*" />
+     <!-- <mapping exclude="true" decorator="/decorators/dashboardtheme" path="/admin" /> -->
+    
+        <mapping  decorator="/decorators/dashboardtheme" path="/admin*" />
+    
+    
 	<mapping exclude="true" decorator="/decorators/dashboardtheme" path="/ajax/*" />
 	<mapping exclude="true" decorator="/decorators/dashboardtheme" path="/pages/examples/lockscreen" />
 	<mapping exclude="true" decorator="/decorators/dashboardtheme" path="/pages/examples/login" />

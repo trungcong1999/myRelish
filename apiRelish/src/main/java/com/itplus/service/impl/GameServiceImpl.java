@@ -10,6 +10,7 @@ import com.itplus.dao.impl.GameDao;
 import com.itplus.entity.CountObject;
 import com.itplus.entity.Creator;
 import com.itplus.entity.FloatValueObject;
+import com.itplus.entity.Creator;
 import com.itplus.entity.Game;
 import com.itplus.entity.GameCriteriaReview;
 import com.itplus.entity.GameInfo;
@@ -81,6 +82,21 @@ public class GameServiceImpl implements GameService{
 		// TODO Auto-generated method stub
 		return gameDao.getRadomReviewById(id);
 	}
+
+	@Override
+	public List<Game> getAllGameName() {
+		// TODO Auto-generated method stub
+		return gameDao.getAllGameName();
+	}
+
+	@Override
+	public List<Creator> getAllCreator() {
+		// TODO Auto-generated method stub
+		return gameDao.getAllCreator();
+	}
+
+
+
 	
 	// API
 	
