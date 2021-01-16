@@ -8,8 +8,10 @@ public class Film {
 	private int writer_id;
 	private int director_id;
 	private String release_date;
+	private String name_creator;
+	
 	public Film(int id, String name, String poster_img, String description, int writer_id, int director_id,
-			String release_date) {
+			String release_date, String name_creator) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -18,6 +20,7 @@ public class Film {
 		this.writer_id = writer_id;
 		this.director_id = director_id;
 		this.release_date = release_date;
+		this.name_creator = name_creator;
 	}
 	public Film() {
 		super();
@@ -65,5 +68,12 @@ public class Film {
 	public void setRelease_date(String release_date) {
 		this.release_date = release_date;
 	}
+	public String getName_creator() {
+		return name_creator;
+	}
+	public void setName_creator(String name_creator) {
+		this.name_creator = name_creator;
+	}
+	
 	
 }

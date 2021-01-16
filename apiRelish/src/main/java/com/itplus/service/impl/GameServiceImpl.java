@@ -74,6 +74,12 @@ public class GameServiceImpl implements GameService{
 		return gameDao.getRadomReviewById(id);
 	}
 
+	@Override
+	public List<Game> getAllGameName() {
+		// TODO Auto-generated method stub
+		return gameDao.getAllGameName();
+	}
+
 
 
 	

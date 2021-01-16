@@ -51,9 +51,11 @@ public class FilmServiceImpl implements FilmService {
 	}
 
 	@Override
-	public List<Film> findByCategoryFilmId(String categoryId) {
+	public List<Film> getAllCreator() {
 		// TODO Auto-generated method stub
-		return filmDao.findByCategoryFilmId(categoryId);
+		return filmDao.getAllCreator();
 	}
+
+
 
 }

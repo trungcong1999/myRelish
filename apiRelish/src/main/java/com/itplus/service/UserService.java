@@ -8,8 +8,11 @@ import com.itplus.entity.User;
 
 @Service
 public interface UserService {
-	List<User> findUserById(int id);
+	List<User> getAllUser();
+	User findUserById(int id);
 	void updateUser(User user);
+	void addUser(User user);
 	User findByEmail(String email);
 	boolean checklogin(String email, String password);
+	int deleteUser(int id);
 }

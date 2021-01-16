@@ -11,5 +11,5 @@ public interface TruyenDao {
 	void deleteTruyen(int id);
 	Truyen getTruyenById(int id);
 	List<Truyen> findByName(String name);
-	List<Truyen> findByCategoryTruyenId(String categoryId);
+	List<Truyen> getAllWithTG();
 }

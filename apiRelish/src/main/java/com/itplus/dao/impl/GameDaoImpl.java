@@ -59,7 +59,13 @@ public class GameDaoImpl implements GameDao {
 	@Override
 	public void deleteGame(int id) {
 		// TODO Auto-generated method stub
-		String sql = "delete from tbl_game_info where id = ?";
+		String sql = "delete from tbl_game_tag where game_id = ?";
+		jdbcTemplate.update(sql, id);
+		sql = "delete from tbl_game_review where id_game = ?";
+		jdbcTemplate.update(sql, id);
+		sql = "delete from tbl_game_rate_criteria where game_id = ?";
+		jdbcTemplate.update(sql, id);
+		sql = "delete from tbl_game_info where id = ?";
 		jdbcTemplate.update(sql, id);
 	}
 
@@ -103,6 +109,32 @@ public class GameDaoImpl implements GameDao {
 		// TODO Auto-generated method stub
 		String sql ="SELECT * FROM tbl_game_info,tbl_game_review WHERE tbl_game_info.id=tbl_game_review.id_game and tbl_game_review.id=?  ";
 		return jdbcTemplate.query(sql,new Object[] {id}, new BeanPropertyRowMapper<Game>(Game.class));
+	}
+
+	@Override
+	public List<Game> getAllGameName() {
+		// TODO Auto-generated method stub
+		String sql="SELECT tbl_game_info.*,tbl_creator.name as username FROM tbl_game_info,tbl_creator WHERE tbl_game_info.publisher_id=tbl_creator.id AND tbl_game_info.developer_id=tbl_creator.id";
+		List<Game> listGame = jdbcTemplate.query(sql, new Object[] {}, new RowMapper<Game>() {
+
+			@Override
+			public Game mapRow(ResultSet rs, int rowNum) throws SQLException {
+				// TODO Auto-generated method stub
+				Game game = new Game();
+				game.setId(rs.getInt("id"));
+				game.setName(rs.getString("name"));
+				game.setRelease_date(rs.getString("release_date"));
+				game.setMetacritic_score(rs.getInt("metacritic_score"));
+				game.setDescription(rs.getString("description"));
+				game.setHeader_img(rs.getString("header_img"));
+				game.setPublisher_id(rs.getInt("publisher_id"));
+				game.setDeveloper_id(rs.getInt("developer_id"));
+				game.setUser_name(rs.getString("username"));
+				return game;
+			}
+
+		});
+		return listGame;
 	}
 
 

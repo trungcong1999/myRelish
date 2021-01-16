@@ -17,4 +17,5 @@ public interface GameService {
 	List<Game> getTagId(int id);
 	List<Game> getReviewByIdUser(int id);
 	List<Game> getRadomReviewById(int id);
+	List<Game> getAllGameName();
 }

@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 import 	android.app.ProgressDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -22,6 +24,7 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,7 +33,7 @@ public class RegisterActivity extends AppCompatActivity {
     EditText editName,editEmail,editPass,editRepass;
     Button btnCreate,btnClose;
     private ProgressDialog pDialog;
-    public static final String REGISTER_URL = "http://localhost:8080/apiRelish/user/register";
+    public static final String REGISTER_URL = "http://192.168.1.103:8080/apiRelish/pages/user/add";
 
     public static final String KEY_USERNAME = "name";
     public static final String KEY_PASSWORD = "password";
@@ -52,11 +55,16 @@ public class RegisterActivity extends AppCompatActivity {
                 if(editPass.getText().length()<8){
                     Toast.makeText(RegisterActivity.this, "Password phải lớn hơn 8 ký tự", Toast.LENGTH_SHORT).show();
                 }else{
+                    Toast.makeText(RegisterActivity.this, "editPass"+editPass.getText()+"\n"+"editRpass"+editRepass.getText(), Toast.LENGTH_SHORT).show();
+                        if((editPass.getText().toString().equals(editRepass.getText().toString()))){
+                            String name = editName.getText().toString().trim();
+                            String password = editPass.getText().toString().trim();
+                            String email = editEmail.getText().toString().trim();
+                            registerUser(name,password,email);
+                        }else{
+                            Toast.makeText(RegisterActivity.this, "Password nhập lại không đúng", Toast.LENGTH_SHORT).show();
+                        }
 
-                        String name = editName.getText().toString().trim();
-                        String password = editPass.getText().toString().trim();
-                        String email = editEmail.getText().toString().trim();
-                        registerUser(name,password,email);
 
                 }
             }
@@ -86,40 +94,34 @@ public class RegisterActivity extends AppCompatActivity {
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
-                            Log.d(TAG, response);
-                            String message = "";
-                            try {
-                                JSONObject jsonObject = new JSONObject(response);
-                                if (jsonObject.getInt("success") == 1) {
 
-                                    message = jsonObject.getString("message");
-                                    Toast.makeText(RegisterActivity.this, message, Toast.LENGTH_LONG).show();
-                                    //Start LoginActivity
-                                    Intent intent = new Intent(RegisterActivity.this, SimpleLoginActivity.class);
-                                    startActivity(intent);
-                                } else {
-                                    message = jsonObject.getString("message");
-                                    Toast.makeText(RegisterActivity.this, message, Toast.LENGTH_LONG).show();
-                                }
-                            } catch (JSONException error) {
-                                VolleyLog.d(TAG, "Error: " + error.getMessage());
-                            }
-                            pDialog.dismiss();
+                            Intent intent = new Intent(RegisterActivity.this, SimpleLoginActivity.class);
+                           startActivity(intent);
+
+
+                           pDialog.dismiss();
                         }
                     },
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            VolleyLog.d(TAG, "Error: " + error.getMessage());
+                            Toast.makeText(RegisterActivity.this, "errorResponse"+error, Toast.LENGTH_SHORT).show();
+                            VolleyLog.d(TAG, "error: " + error.getMessage());
                             pDialog.dismiss();
                         }
                     }) {
                 @Override
-                protected Map<String, String> getParams() {
+                protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> params = new HashMap<>();
                     params.put(KEY_USERNAME, name);
                     params.put(KEY_PASSWORD, password);
                     params.put(KEY_EMAIL, email);
+                    long millis=System.currentTimeMillis();
+                    Date date = new Date(millis);
+                    params.put("birthday", date.toString());
+                    params.put("gender", "0");
+                    params.put("bio", "");
+                    params.put("image", "");
                     return params;
                 }
 

@@ -51,9 +51,11 @@ public class TruyenServiceImpl implements TruyenService{
 	}
 
 	@Override
-	public List<Truyen> findByCategoryTruyenId(String categoryId) {
+	public List<Truyen> getAllWithTG() {
 		// TODO Auto-generated method stub
-		return truyenDao.findByCategoryTruyenId(categoryId);
+		return truyenDao.getAllWithTG();
 	}
+
+	
 
 }
