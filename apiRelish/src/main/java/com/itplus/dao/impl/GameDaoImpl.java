@@ -193,7 +193,7 @@ public class GameDaoImpl implements GameDao {
 
 	@Override
 	public FloatValueObject getAverageScoreByGameId(int gameId) {
-		String sql = "SELECT AVG(score) AS value FROM tbl_game_rate_criteria WHERE game_id=?";
+		String sql = "SELECT IFNULL((SELECT AVG(score) FROM tbl_game_rate_criteria WHERE game_id=?),0)  AS value";
 		return jdbcTemplate.queryForObject(sql,new Object[] {gameId}, new BeanPropertyRowMapper<FloatValueObject>(FloatValueObject.class));
 	}
 

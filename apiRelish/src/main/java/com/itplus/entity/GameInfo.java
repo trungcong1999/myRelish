@@ -6,19 +6,12 @@ import org.springframework.lang.Nullable;
 
 public class GameInfo {
 	private int id;
-	@NotNull
 	private String name;
-	@NotNull
 	private String release_date;
-	@NotNull
 	private int metacritic_score;
-	@NotNull
 	private String description;
-	@NotNull
 	private String header_img;
-	@Nullable
 	private String publisher_name;
-	@Nullable
 	private String developer_name;
 	
 	private int count_in_collection;

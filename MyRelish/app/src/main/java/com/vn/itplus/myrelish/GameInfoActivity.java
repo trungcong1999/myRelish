@@ -1,5 +1,6 @@
 package com.vn.itplus.myrelish;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -37,6 +38,7 @@ public class GameInfoActivity extends AppCompatActivity {
     private ImageView imageGameHeader;
     private RecyclerView listviewOtherReviews;
     private View btnAddToCollection, btnGoToMyReview;
+    private int gameId;
 
     private void mapping() {
         textTitleTop = findViewById(R.id.text_title_top);
@@ -68,7 +70,7 @@ public class GameInfoActivity extends AppCompatActivity {
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         int userId = preferences.getInt("userId", -1);
-        int gameId = getIntent().getIntExtra("id", -1);
+        gameId = getIntent().getIntExtra("id", -1);
         if (gameId >= 0){
             loadInfo(gameId);
             loadOtherReviews(gameId);
@@ -140,18 +142,12 @@ public class GameInfoActivity extends AppCompatActivity {
 
                             if (data.getInt("count_value")>0){
                                 textIsGameInCollection.setText("Game đã có trong bộ sưu tập của bạn");
-                                btnActionButton.setVisibility(View.GONE);
+//                                btnActionButton.setVisibility(View.GONE);
 
                                 btnAddToCollection.setVisibility(View.GONE);
                                 btnGoToMyReview.setVisibility(View.VISIBLE);
 
                                 final int id = data.getInt("id");
-                                btnAddToCollection.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        gotoMyReview(v, id);
-                                    }
-                                });
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -168,18 +164,43 @@ public class GameInfoActivity extends AppCompatActivity {
         reqQueue.add(request);
     }
 
-    public void addToCollection(View view){
-        // check login
-        // send request => change UI
-    }
-
     public void goBack(View view){
         finish();
     }
 
-    public void gotoMyReview(View view, int id){
+    public void gotoMyReview(View view){
+        requireLogin();
+    }
+    private void startGameReviewActivity(){
         Intent intent = new Intent(getBaseContext(), GameReviewActivity.class);
-        intent.putExtra("id", id);
+        intent.putExtra("id", gameId);
         startActivity(intent);
+    }
+
+    private void requireLogin(){
+        // check login
+        // NOTE: getContext() or get Activity() ?
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        if (preferences.contains("userId")){
+            // user has login
+            startGameReviewActivity();
+        }else{
+            // haven't login
+            Intent intent = new Intent(getBaseContext(), SimpleLoginActivity.class);
+            startActivityForResult(intent, getResources().getInteger(R.integer.loginRequestCode));
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == getResources().getInteger(R.integer.loginRequestCode)){
+            if (resultCode == getResources().getInteger(R.integer.loginResultSuccessCode)){
+                Toast.makeText(getBaseContext(), "You logged in", Toast.LENGTH_SHORT).show();
+                startGameReviewActivity();
+            }else if (resultCode == getResources().getInteger(R.integer.loginResultSkipCode)){
+                Toast.makeText(getBaseContext(), "You skipped logging in", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }

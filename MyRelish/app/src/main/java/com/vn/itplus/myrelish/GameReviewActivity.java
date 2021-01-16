@@ -70,17 +70,15 @@ public class GameReviewActivity extends AppCompatActivity {
         listItemReviewArticle = new ArrayList<>();
 
         // NOTE: just for testing
-        loadGameInfo(1);
-        loadListCriteria(1, 1);
-        loadListReviewArticle(1, 1);
+//        loadGameInfo(1);
+//        loadListCriteria(1, 1);
+//        loadListReviewArticle(1, 1);
         // end testing
 
         int gameId = getIntent().getIntExtra("id", -1);
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         int userId = preferences.getInt("userId", -1);
         if (gameId >= 0 && userId >= 0){
-
-
             loadGameInfo(gameId);
             loadListCriteria(userId, gameId);
             loadListReviewArticle(userId, gameId);

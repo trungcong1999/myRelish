@@ -114,7 +114,7 @@ public class GameRestController {
 		return gson.toJson(gamesIdUser);
 	}
 	
-	@RequestMapping(value = "game/{gameid}/info",method = RequestMethod.GET, produces = "text/plain;charset=UTF-8")
+	@RequestMapping(value = "game/info/{gameid}",method = RequestMethod.GET, produces = "text/plain;charset=UTF-8")
 	public String getGameInfoById(HttpServletRequest request, @PathVariable int gameid) {
 		GameInfo result = gameService.getGameInfoById(gameid);
 		Gson gson = new Gson();
