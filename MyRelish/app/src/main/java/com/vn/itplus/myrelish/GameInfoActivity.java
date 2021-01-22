@@ -18,16 +18,12 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.EventListener;
 
 public class GameInfoActivity extends AppCompatActivity {
     private TextView textTitleTop, textTitle, textDescription,
@@ -171,9 +167,11 @@ public class GameInfoActivity extends AppCompatActivity {
     public void gotoMyReview(View view){
         requireLogin();
     }
-    private void startGameReviewActivity(){
+    private void startMyGameReviewActivity(){
         Intent intent = new Intent(getBaseContext(), GameReviewActivity.class);
-        intent.putExtra("id", gameId);
+        intent.putExtra("gameId", gameId);
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        intent.putExtra("userId", preferences.getInt("userId", -1));
         startActivity(intent);
     }
 
@@ -183,7 +181,7 @@ public class GameInfoActivity extends AppCompatActivity {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         if (preferences.contains("userId")){
             // user has login
-            startGameReviewActivity();
+            startMyGameReviewActivity();
         }else{
             // haven't login
             Intent intent = new Intent(getBaseContext(), SimpleLoginActivity.class);
@@ -197,7 +195,7 @@ public class GameInfoActivity extends AppCompatActivity {
         if (requestCode == getResources().getInteger(R.integer.loginRequestCode)){
             if (resultCode == getResources().getInteger(R.integer.loginResultSuccessCode)){
                 Toast.makeText(getBaseContext(), "You logged in", Toast.LENGTH_SHORT).show();
-                startGameReviewActivity();
+                startMyGameReviewActivity();
             }else if (resultCode == getResources().getInteger(R.integer.loginResultSkipCode)){
                 Toast.makeText(getBaseContext(), "You skipped logging in", Toast.LENGTH_SHORT).show();
             }

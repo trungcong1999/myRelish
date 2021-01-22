@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.itplus.entity.CountObject;
 import com.itplus.entity.Game;
+import com.itplus.entity.GameCriteria;
 import com.itplus.entity.GameCriteriaReview;
 import com.itplus.entity.GameInfo;
 import com.itplus.entity.GameReviewArticle;
@@ -124,12 +126,11 @@ public class GameRestController {
 	// Lấy tất cả các tiêu chính mà người dùng có userId đã đánh giá về game có gameId
 	@RequestMapping(value = "game/{gameId}/user/{userId}/all-criteria-reviewed", produces = "text/plain;charset=UTF-8")
 	public String getAllCriteriaReviewed(HttpServletRequest request, @PathVariable int gameId, @PathVariable int userId) {
-		List<GameCriteriaReview> result = gameService.getAllCriteria(userId, gameId);
+		List<GameCriteriaReview> result = gameService.getAllCriteriaReviews(userId, gameId);
 		Gson gson = new Gson();
 		return gson.toJson(result);
 	}
 	
-	// Lấy tất cả các tiêu chính mà người dùng có userId đã đánh giá về game có gameId
 	@RequestMapping(value = "game/{gameId}/user/{userId}/all-review-articles", produces = "text/plain;charset=UTF-8")
 	public String getAllReviewArticle(HttpServletRequest request, @PathVariable int gameId, @PathVariable int userId) {
 		List<GameReviewArticle> result = gameService.getAllReviewArticles(userId, gameId);
@@ -137,12 +138,78 @@ public class GameRestController {
 		return gson.toJson(result);
 	}
 	
-	// Lấy tất cả các tiêu chính mà người dùng có userId đã đánh giá về game có gameId
-		@RequestMapping(value = "game/{gameId}/user/{userId}/check-is-in-collection", produces = "text/plain;charset=UTF-8")
-		public String checkIsGameInCollection(HttpServletRequest request, @PathVariable int gameId, @PathVariable int userId) {
-			CountObject result = gameService.checkIsGameInCollecion(userId, gameId);
-			Gson gson = new Gson();
-			return gson.toJson(result);
-		}
+	@RequestMapping(value = "game/{gameId}/user/{userId}/check-is-in-collection", produces = "text/plain;charset=UTF-8")
+	public String checkIsGameInCollection(HttpServletRequest request, @PathVariable int gameId, @PathVariable int userId) {
+		CountObject result = gameService.checkIsGameInCollecion(userId, gameId);
+		Gson gson = new Gson();
+		return gson.toJson(result);
+	}
+	
+	@RequestMapping(value = "game/list-criteria", produces = "text/plain;charset=UTF-8")
+	public String checkIsGameInCollection(HttpServletRequest request) {
+		List<GameCriteria> result = gameService.getAllCriterias();
+		Gson gson = new Gson();
+		return gson.toJson(result);
+	}
+	
+	@RequestMapping(value = "game/add-criteria-review", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
+	public String addGameCriteriaReview(HttpServletRequest request) {
+		GameCriteriaReview gameCriteriaReview = new GameCriteriaReview(
+				Integer.parseInt(request.getParameter("userId")),
+				Integer.parseInt(request.getParameter("gameId")),
+				Integer.parseInt(request.getParameter("criteriaId")),
+				Integer.parseInt(request.getParameter("score")),
+				request.getParameter("review"),
+				""
+				);
+		
+		JsonObject resultJson = new JsonObject();
+		boolean result = gameService.addCriteriaReview(gameCriteriaReview);
+		
+		resultJson.addProperty("isSuccess", result);
+		resultJson.addProperty("message", "There is an error");
+		Gson gson = new Gson();
+		return gson.toJson(resultJson);
+	}
+	
+	@RequestMapping(value = "game/edit-criteria-review", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
+	public String editGameCriteriaReview(HttpServletRequest request) {
+		GameCriteriaReview gameCriteriaReview = new GameCriteriaReview(
+				Integer.parseInt(request.getParameter("userId")),
+				Integer.parseInt(request.getParameter("gameId")),
+				Integer.parseInt(request.getParameter("criteriaId")),
+				Integer.parseInt(request.getParameter("score")),
+				request.getParameter("review"),
+				""
+				);
+		
+		JsonObject resultJson = new JsonObject();
+		boolean result = gameService.editCriteriaReview(gameCriteriaReview);
+		
+		resultJson.addProperty("isSuccess", result);
+		resultJson.addProperty("message", "There is an error");
+		Gson gson = new Gson();
+		return gson.toJson(resultJson);
+	}
+	
+	@RequestMapping(value = "game/delete-criteria-review", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
+	public String deleteGameCriteriaReview(HttpServletRequest request) {
+		GameCriteriaReview gameCriteriaReview = new GameCriteriaReview(
+				Integer.parseInt(request.getParameter("userId")),
+				Integer.parseInt(request.getParameter("gameId")),
+				Integer.parseInt(request.getParameter("criteriaId")),
+				0,
+				"",
+				""
+				);
+		
+		JsonObject resultJson = new JsonObject();
+		boolean result = gameService.deleteCriteriaReview(gameCriteriaReview);
+		
+		resultJson.addProperty("isSuccess", result);
+		resultJson.addProperty("message", "There is an error");
+		Gson gson = new Gson();
+		return gson.toJson(resultJson);
+	}
 }
 

@@ -12,6 +12,7 @@ import com.itplus.entity.Creator;
 import com.itplus.entity.FloatValueObject;
 import com.itplus.entity.Creator;
 import com.itplus.entity.Game;
+import com.itplus.entity.GameCriteria;
 import com.itplus.entity.GameCriteriaReview;
 import com.itplus.entity.GameInfo;
 import com.itplus.entity.GameReviewArticle;
@@ -126,8 +127,8 @@ public class GameServiceImpl implements GameService{
 	}
 
 	@Override
-	public List<GameCriteriaReview> getAllCriteria(int userId, int gameId) {
-		return gameDao.getAllCriteria(userId, gameId);
+	public List<GameCriteriaReview> getAllCriteriaReviews(int userId, int gameId) {
+		return gameDao.getAllCriteriaReviews(userId, gameId);
 	}
 
 	@Override
@@ -138,5 +139,25 @@ public class GameServiceImpl implements GameService{
 	@Override
 	public CountObject checkIsGameInCollecion(int userId, int gameId) {
 		return gameDao.checkIsGameInCollection(gameId, userId);
+	}
+
+	@Override
+	public List<GameCriteria> getAllCriterias() {
+		return gameDao.getAllCriterias();
+	}
+
+	@Override
+	public boolean addCriteriaReview(GameCriteriaReview gameCriteriaReview) {
+		return gameDao.addCriteriaReview(gameCriteriaReview);
+	}
+
+	@Override
+	public boolean editCriteriaReview(GameCriteriaReview gameCriteriaReview) {
+		return gameDao.editCriteriaReview(gameCriteriaReview);
+	}
+
+	@Override
+	public boolean deleteCriteriaReview(GameCriteriaReview gameCriteriaReview) {
+		return gameDao.deleteCriteriaReview(gameCriteriaReview);
 	}
 }

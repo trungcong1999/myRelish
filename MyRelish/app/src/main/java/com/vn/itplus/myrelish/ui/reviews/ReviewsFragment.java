@@ -58,7 +58,7 @@ public class ReviewsFragment extends Fragment {
 
     private void loadRecentReview() {
         listItemReview = new ArrayList<>();
-        listReviewAdapter = new ListReviewArticleRecycleAdapter(listItemReview);
+        listReviewAdapter = new ListReviewArticleRecycleAdapter(listItemReview, false);
         listviewRecentReview.setHasFixedSize(true);
         listviewRecentReview.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         listviewRecentReview.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));

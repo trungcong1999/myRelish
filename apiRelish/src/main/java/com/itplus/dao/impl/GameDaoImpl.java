@@ -15,6 +15,7 @@ import com.itplus.entity.CountObject;
 import com.itplus.entity.FloatValueObject;
 import com.itplus.entity.Creator;
 import com.itplus.entity.Game;
+import com.itplus.entity.GameCriteria;
 import com.itplus.entity.GameCriteriaReview;
 import com.itplus.entity.GameReviewArticle;
 
@@ -117,7 +118,7 @@ public class GameDaoImpl implements GameDao {
 	}
 
 	@Override
-	public List<GameCriteriaReview> getAllCriteria(int gameId, int userId) {
+	public List<GameCriteriaReview> getAllCriteriaReviews(int userId, int gameId) {
 		String sql = "SELECT tbl_game_rate_criteria.*, tbl_game_criteria.name AS criteria_name"
 				+ " FROM tbl_game_rate_criteria INNER JOIN tbl_game_criteria "
 				+ "ON tbl_game_rate_criteria.criteria_id=tbl_game_criteria.id "
@@ -198,9 +199,51 @@ public class GameDaoImpl implements GameDao {
 	}
 
 	@Override
-	public CountObject checkIsGameInCollection(int gameId, int userId) {
+	public CountObject checkIsGameInCollection(int userId, int gameId) {
 		String sql = "SELECT (EXISTS(SELECT * FROM tbl_game_review WHERE id_game=? AND id_user=?)\r\n" + 
 				"OR EXISTS(SELECT * FROM tbl_game_rate_criteria WHERE game_id=? AND user_id=?)) AS count_value";
 		return jdbcTemplate.queryForObject(sql,new Object[] {gameId,userId,gameId,userId}, new BeanPropertyRowMapper<CountObject>(CountObject.class));
+	}
+
+	@Override
+	public List<GameCriteria> getAllCriterias() {
+		String sql = "SELECT * FROM tbl_game_criteria";
+		return jdbcTemplate.query(sql,new Object[] {}, new BeanPropertyRowMapper<GameCriteria>(GameCriteria.class));
+	}
+
+	@Override
+	public boolean addCriteriaReview(GameCriteriaReview gameCriteriaReview) {
+		String sql = "insert into tbl_game_rate_criteria(user_id,game_id,criteria_id,score,review) values(?, ?, ?, ?, ?)";
+		int countAffectedRow = 0;
+		try {
+			countAffectedRow = jdbcTemplate.update(sql, gameCriteriaReview.getUser_id(), gameCriteriaReview.getGame_id(), gameCriteriaReview.getCriteria_id(), gameCriteriaReview.getScore(), gameCriteriaReview.getReview());
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return (countAffectedRow>0); 
+	}
+
+	@Override
+	public boolean editCriteriaReview(GameCriteriaReview gameCriteriaReview) {
+		String sql = "UPDATE tbl_game_rate_criteria SET score=?, review=? WHERE user_id=? AND game_id=? AND criteria_id=?";
+		int countAffectedRow = 0;
+		try {
+			countAffectedRow = jdbcTemplate.update(sql, gameCriteriaReview.getScore(), gameCriteriaReview.getReview(), gameCriteriaReview.getUser_id(), gameCriteriaReview.getGame_id(), gameCriteriaReview.getCriteria_id());
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return (countAffectedRow>0); 
+	}
+
+	@Override
+	public boolean deleteCriteriaReview(GameCriteriaReview gameCriteriaReview) {
+		String sql = "DELETE FROM tbl_game_rate_criteria WHERE user_id=? AND game_id=? AND criteria_id=?";
+		int countAffectedRow = 0;
+		try {
+			countAffectedRow = jdbcTemplate.update(sql, gameCriteriaReview.getUser_id(), gameCriteriaReview.getGame_id(), gameCriteriaReview.getCriteria_id());
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return (countAffectedRow>0); 
 	}
 }

@@ -21,6 +21,8 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@color/colorTransparent"
+            android:clickable="true"
+            android:onClick="goBack"
             android:padding="4dp"
             android:scaleType="fitXY"
             android:tint="@color/colorOnPrimary"
@@ -65,7 +67,6 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:paddingTop="48dp"
-        android:paddingBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -74,14 +75,15 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="16dp">
 
             <TextView
                 android:id="@+id/text_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:text="Herritage: Flowers for the fallen"
+                android:text="Game Title"
                 android:textAlignment="center"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="20sp"
@@ -115,7 +117,7 @@
                         android:id="@+id/text_release_date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="29/12/2020"
+                        android:text="dd/mm/yyyy"
                         android:textAlignment="center"
                         android:textSize="12sp"
                         android:textStyle="bold" />
@@ -190,7 +192,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
-                android:text="Bạn đã đánh giá game trên 10 tiêu chí"
+                android:text="Số tiêu chí được đánh giá: 10"
                 android:textAlignment="center"
                 android:textSize="12sp" />
 
@@ -203,12 +205,149 @@
             </androidx.recyclerview.widget.RecyclerView>
 
             <LinearLayout
+                android:id="@+id/container_edit_criteria"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/text_title_edit_criteria"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:text="Thêm tiêu chí mới"
+                    android:textAlignment="center"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:orientation="vertical"
+                        app:layout_constraintEnd_toStartOf="@+id/linearLayout8"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/textView28"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Tiêu chí" />
+
+                        <Spinner
+                            android:id="@+id/spinner_select_criteria"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/textView30"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Điểm đánh giá: " />
+
+                            <TextView
+                                android:id="@+id/text_preview_criteria_score"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="0" />
+                        </LinearLayout>
+
+                        <RatingBar
+                            android:id="@+id/rating_bar_criteria_score"
+                            style="@style/Widget.AppCompat.RatingBar.Small"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:isIndicator="false"
+                            android:minWidth="0dp"
+                            android:minHeight="0dp"
+                            android:numStars="10"
+                            android:progressTint="@color/colorPrimary"
+                            android:stepSize="1" />
+
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/text_criteria_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Chi tiết về tiêu chí"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/edittext_criteria_review"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:gravity="start|top"
+                    android:hint="Nhập một đoạn đánh giá ngắn"
+                    android:inputType="textMultiLine"
+                    android:minLines="3"
+                    android:textSize="12sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btn_submit_edit_criteria"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorPrimary"
+                        android:onClick="submitEditCriteria"
+                        android:text="Thêm"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorOnPrimary" />
+
+                    <Button
+                        android:id="@+id/btn_cancel_edit_criteria"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_weight="1"
+                        android:background="@color/colorBackgroundTint"
+                        android:onClick="cancelEditCriteria"
+                        android:text="Hủy"
+                        android:textAllCaps="false" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/btn_add_criteria"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="8dp"
                 android:background="@color/colorPrimary"
+                android:onClick="openAddNewCriteria"
                 android:orientation="horizontal"
                 android:paddingLeft="4dp"
                 android:paddingRight="8dp">

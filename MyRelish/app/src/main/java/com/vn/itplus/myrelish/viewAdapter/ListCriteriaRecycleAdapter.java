@@ -46,9 +46,11 @@ public class ListCriteriaRecycleAdapter extends RecyclerView.Adapter<ListCriteri
     }
 
     private List<ItemCriteriaReview> listItemCriteriaReview;
+    private boolean allowEdit;
 
-    public ListCriteriaRecycleAdapter(List<ItemCriteriaReview> listItemCriteriaReview) {
+    public ListCriteriaRecycleAdapter(List<ItemCriteriaReview> listItemCriteriaReview, boolean allowEdit) {
         this.listItemCriteriaReview = listItemCriteriaReview;
+        this.allowEdit = allowEdit;
     }
 
     @NonNull

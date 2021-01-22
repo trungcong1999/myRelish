@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.itplus.entity.CountObject;
 import com.itplus.entity.Creator;
 import com.itplus.entity.Game;
+import com.itplus.entity.GameCriteria;
 import com.itplus.entity.GameCriteriaReview;
 import com.itplus.entity.GameInfo;
 import com.itplus.entity.GameReviewArticle;
@@ -24,9 +25,14 @@ public interface GameService {
 	List<Game> getRadomReviewById(int id);
 	
 	GameInfo getGameInfoById(int gameId);
-	List<GameCriteriaReview> getAllCriteria(int userId, int gameId);
+	List<GameCriteriaReview> getAllCriteriaReviews(int userId, int gameId);
 	List<GameReviewArticle> getAllReviewArticles(int userId, int gameId);
 	CountObject checkIsGameInCollecion(int userId, int gameId);
 	List<Game> getAllGameName();
 	List<Creator> getAllCreator();
+	List<GameCriteria> getAllCriterias();
+	
+	boolean addCriteriaReview(GameCriteriaReview gameCriteriaReview);
+	boolean editCriteriaReview(GameCriteriaReview gameCriteriaReview);
+	boolean deleteCriteriaReview(GameCriteriaReview gameCriteriaReview);
 }

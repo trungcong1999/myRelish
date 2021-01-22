@@ -48,9 +48,11 @@ public class ListReviewArticleRecycleAdapter extends RecyclerView.Adapter<ListRe
     }
 
     private List<ItemReviewArticle> listItemReviewArticle;
+    private boolean allowEdit;
 
-    public ListReviewArticleRecycleAdapter(List<ItemReviewArticle> listItemReviewArticle) {
+    public ListReviewArticleRecycleAdapter(List<ItemReviewArticle> listItemReviewArticle, boolean allowEdit) {
         this.listItemReviewArticle = listItemReviewArticle;
+        this.allowEdit = allowEdit;
     }
 
     @NonNull
